@@ -52,43 +52,69 @@ const Form = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Enter your Email:</label>
-                <input name="email" type="email" value={formData.email} onChange={handleChange} />
-                <br />
-                <label htmlFor="name">Enter your Name:</label>
-                <input name="name" type="text" value={formData.name} onChange={handleChange} />
-                <br />
-                <label htmlFor="seat">Enter your Seat Number:</label>
-                <input name="seat" type="text" value={formData.seat} onChange={handleChange} />
-                <br />
+            <h1 style={{
+                display: "flex",
+                justifyContent: "center",
+                fontSize: "2vh",
+                fontWeight: 600,
+                textAlign: "center",
+                marginTop: "3vh"
+            }}>
+                Welcome to Somaiya Minor Selection Form
+            </h1>
+            <div style={{
+                display: "flex",
+                justifyContent: "left"
+            }}>
+                <form style={{ margin: "3vh", marginLeft: "2vw", width: "200vw" }} onSubmit={handleSubmit}>
+                    <label htmlFor="email" className="form-label">Enter your Email:</label>
+                    <input
+                        id="email"
+                        name="email"
+                        className="form-control"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        style={{ marginBottom: "3vh" }}
+                        placeholder="Somaiya Email"
+                        required
+                    />
 
-                <Box sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Courses</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={formData.minor}
-                            label="Courses"
-                            name="minor"
-                            onChange={handleChange}
-                        >
-                            <MenuItem value={"UI / UX"}>UI/UX</MenuItem>
-                            <MenuItem value={"Finance"}>Finance</MenuItem>
-                            <MenuItem value={"BMS"}>BMS</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Box>
+                    <label htmlFor="name" className="form-label">Enter your Name:</label>
+                    <input id="name" name="name" className="form-control" type="text" value={formData.name} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Name" required />
 
-                <br />
-                <button type="submit">Submit</button>
-            </form>
-            <Dialog open={alertOpen} onClose={handleAlertClose}>
-                <Alert onClose={handleAlertClose} severity={severity}>
-                    {alertMessage}
-                </Alert>
-            </Dialog>
+                    <label htmlFor="seat" className="form-label">Enter your Seat Number:</label>
+                    <input id="seat" name="seat" className="form-control" type="text" value={formData.seat} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Seat Number" required />
+
+                    <label htmlFor="minorCourse" className="form-label">Select your Course:</label>
+                    <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Course</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="minorCourse"
+                                value={formData.minor}
+                                label="Courses"
+                                name="minor"
+                                onChange={handleChange}
+                                required
+                            >
+                                <MenuItem value={"UI / UX"}>UI/UX</MenuItem>
+                                <MenuItem value={"Finance"}>Finance</MenuItem>
+                                <MenuItem value={"BMS"}>BMS</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+
+
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+                <Dialog open={alertOpen} onClose={handleAlertClose}>
+                    <Alert onClose={handleAlertClose} severity={severity}>
+                        {alertMessage}
+                    </Alert>
+                </Dialog>
+            </div>
         </>
     );
 };
