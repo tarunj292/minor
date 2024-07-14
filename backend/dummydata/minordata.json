@@ -1,0 +1,78 @@
+[
+  {
+    "courseName": "Minor program in Accounting",
+    "capacity": 60
+  },
+  {
+    "courseName": "Minor program in Finance",
+    "capacity": 60
+  },
+  {
+    "courseName": "Minor program in Taxation",
+    "capacity": 60
+  },
+  {
+    "courseName": "Minor program in Banking",
+    "capacity": 60
+  },
+  {
+    "courseName": "Minor program in Psychology",
+    "capacity": 60
+  },
+  {
+    "courseName": "Minor program in Financial Market",
+    "capacity": 80
+  },
+  {
+    "courseName": "Minor program in Economics",
+    "capacity": 60
+  },
+  {
+    "courseName": "Minor program in Mass Communication",
+    "capacity": 60
+  },
+  {
+    "courseName": "Minor program in bioinformatics and Omics",
+    "capacity": 40
+  },
+  {
+    "courseName": "Minor program in Nanatechnology and IPR",
+    "capacity": 40
+  },
+  {
+    "courseName": "Minor program in Biotechnology",
+    "capacity": 40
+  },
+  {
+    "courseName": "Minor program in Data Science and Analytics",
+    "capacity": 150
+  },
+  {
+    "courseName": "Minor program in Embedded system & IOT",
+    "capacity": 40
+  },
+  {
+    "courseName": "Minor program in Cyber Security",
+    "capacity": 150
+  },
+  {
+    "courseName": "Minor program in UI/UX",
+    "capacity": 80
+  },
+  {
+    "courseName": "Minor program in Marketing",
+    "capacity": 120
+  },
+  {
+    "courseName": "Minor program in Management",
+    "capacity": 120
+  },
+  {
+    "courseName": "Minor program in Yoga",
+    "capacity": 40
+  },
+  {
+    "courseName": "Minor program in Indian Heritage",
+    "capacity": 40
+  }
+]

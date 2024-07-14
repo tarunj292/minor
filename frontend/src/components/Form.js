@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
+import { getAllMinors } from '../actions/studentAction';
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -54,6 +55,7 @@ const Form = () => {
         event.preventDefault();
         // Handle form submission logic here
     };
+    useEffect(()=>{getAllMinors().then(response=>console.log(response))},[])
 
     return (
         <>
