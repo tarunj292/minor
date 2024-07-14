@@ -9,10 +9,6 @@ const MinorSubjectSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  remainingCapacity:{
-    type: Number,
-    default:capacity
-  },
   students: [
     {
       name: {
@@ -27,56 +23,58 @@ const MinorSubjectSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      mobileno: {
+        type: Number,
+        required: true, 
+      },
+      memberid: {
+        type: String,
+        required: true,
+      },
+      programName:{
+        type:String,
+        required:true
+      },
+      professionalcourse: {
+        type:String,
+        required:true
+      },
+      Language: {
+        type: {
+          type: String,
+          required:true
+        },
+      },
     },
   ],
 });
 
-const ParentSchema = new mongoose.Schema({
-  minorsubjects: [MinorSubjectSchema],
+MinorSubjectSchema.virtual("remainingCapacity").get(function () {
+  return this.capacity - this.students.length;
 });
 
-const MinorSchema = mongoose.model("Parent", ParentSchema);
 
-module.exports = MinorSchema;
+const ProgramSchema=new mongoose.Schema({
+    programname:{
+      type:String,
+      required:true,
+      minors:{
+        type:[{type:String}],
+      }
+    }
+});
 
+module.exports=mongoose.model("Program",ProgramSchema);
+module.exports = mongoose.model("Minor", MinorSubjectSchema);;
 
-// const mongoose = require("mongoose");
-
-// const StudentSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: true,
-//   },
-//   email: {
-//     type: String,
-//     required: true,
-//   },
-//   rollno: {
-//     type: String,
-//     required: true,
-//   },
+// const programName=new mongoose.Schema(
+//   {
+//     name: {
+//   }
+//   minor:[]
 // });
 
-// const MinorSubjectSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: true,
-//   },
-//   capacity: {
-//     type: Number,
-//     required: true,
-//   },
-//   students: [StudentSchema], // Embed the StudentSchema within the MinorSubjectSchema
-// });
-
-// const ParentSchema = new mongoose.Schema({
-//   minorsubjects: [MinorSubjectSchema],
-// });
-
-// const MinorSchema = mongoose.model("Minor", ParentSchema); // Corrected the model name to "Minor"
-// module.exports = MinorSchema;
-
-
+//program name:"ABC"
 // const mongoose = require("mongoose");
 
 // const StudentSchema = new mongoose.Schema({
