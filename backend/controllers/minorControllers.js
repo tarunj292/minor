@@ -1,10 +1,7 @@
-const {
-  MinorSubjectSchema: MinorSchema,
-  programSchema: Program,
-} = require("../models/MinorSchema");
+const MinorSchema = require("../models/MinorSchema");
+const Program=require("../models/ProgramSchema");
 
-
-const getAllMinors = async (req, res) => {
+exports.getAllMinors = async (req, res) => {
   try {
     const minor = await MinorSchema.find();
     res.send({
@@ -19,7 +16,7 @@ const getAllMinors = async (req, res) => {
   }
 };
 
-const createStudent = async (req, res) => {
+exports.createStudent = async (req, res) => {
   try {
     const {
       name,
@@ -68,8 +65,3 @@ exports.getAllPrograms = async (req, res) => {
     });
   }
 };
-
-
-module.exports(
-  getAllMinors,createStudent
-)
