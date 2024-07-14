@@ -4,6 +4,6 @@ const router = express.Router();
 const{createStudent,getAllMinors}=require("../controllers/minorControllers");
 
 router.get("/getMinor", getAllMinors);
-router.post("/createStudent",createStudent);
+router.patch("/createStudent",createStudent);
 
 module.exports = router;

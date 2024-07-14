@@ -5,7 +5,7 @@ const createStudent = async (req, res) => {
     const { name, email, seatno,mobileno,memberid,programName,professionalcourse,language, minorSubject } = req.body;
     const minor = await MinorSchema.findOne({ courseName: minorSubject });
     if (!minor) {
-      return res.status(404).json({ message: "Minor subject not found" });
+      return res.status(404).send({ message: "Minor subject not found" });
     }
     const student = {
       name,
@@ -19,21 +19,42 @@ const createStudent = async (req, res) => {
     };
     minor.students.push(student);
     await minor.save();
-    res.status(201).json({ message: "Student registered under minor subject" });
+    res.status(201).send({ message: "Student registered under minor subject" });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).send({ message: error.message });
   }
 };
 
-const getAllMinors = async (req, res) => {
+// const getAllMinors = async (req, res) => {
+//   try {
+//     const minors = await MinorSchema.find()
+//     res.send({data:minors});
+//   } catch (error) {
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// };
+// const getAllMinors = async (req, res) => {
+//   await MinorSchema.find({}).then((minors) => {
+//     res.send({ data: minors });
+//   }).catch((error) => {
+//     res.status(500).send({ error: "Internal server error" });
+//   });
+// };
+exports.getAllMinors = async (req, res) => {
   try {
-    const minors = await Minor.find();
-    res.json(minors);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    const minor = await MinorSchema.find()
+    res.send({
+      success: true,
+      data: minor,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
   }
 };
 
-module.exports={
-  createStudent,getAllMinors
-}
+// module.exports={
+//   createStudent,
+// }
