@@ -8,6 +8,10 @@ import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
 import { getAllMinors } from '../actions/studentAction';
 
+
+
+// regular expression for phone number and seat number
+
 const Form = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -77,7 +81,7 @@ const Form = () => {
                     <label htmlFor="name" className="form-label">Enter your Name:</label>
                     <input id="name" name="name" className="form-control" type="text" value={formData.name} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Name" required />
 
-                    <label htmlFor="email" className="form-label">Enter your Email:</label>
+                    <label htmlFor="email" className="form-label" >Enter your Email:</label>
                     <input
                         id="email"
                         name="email"
