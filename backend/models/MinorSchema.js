@@ -53,15 +53,4 @@ const MinorSubjectSchema = new mongoose.Schema({
   ],
 });
 
-
-const programSchema = new mongoose.Schema({
-  progName: {
-    type: String,
-    required: true,
-  },
-  minor: [],
-});
-
-
 module.exports = mongoose.model("Minor", MinorSubjectSchema);
-module.exports = mongoose.model("Program", programSchema);

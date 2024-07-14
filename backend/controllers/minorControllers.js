@@ -1,8 +1,5 @@
-const {
-  MinorSubjectSchema: MinorSchema,
-  programSchema: Program,
-} = require("../models/MinorSchema");
-
+const MinorSchema = require("../models/MinorSchema");
+const Program=require("../models/ProgramSchema");
 
 exports.getAllMinors = async (req, res) => {
   try {
