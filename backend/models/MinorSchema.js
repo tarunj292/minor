@@ -9,6 +9,12 @@ const MinorSubjectSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  remainingCapacity: {
+    type: Number,
+    default: function () {
+      return this.capacity;
+    },
+  },
   students: [
     {
       name: {
@@ -25,46 +31,28 @@ const MinorSubjectSchema = new mongoose.Schema({
       },
       mobileno: {
         type: Number,
-        required: true, 
+        required: true,
       },
       memberid: {
         type: String,
         required: true,
       },
-      programName:{
-        type:String,
-        required:true
+      programName: {
+        type: String,
+        required: true,
       },
       professionalcourse: {
-        type:String,
-        required:true
+        type: String,
+        required: true,
       },
-      Language: {
-        type: {
+      language: {
           type: String,
-          required:true
-        },
+          required: true,
       },
     },
   ],
 });
 
-MinorSubjectSchema.virtual("remainingCapacity").get(function () {
-  return this.capacity - this.students.length;
-});
-
-
-const ProgramSchema=new mongoose.Schema({
-    programname:{
-      type:String,
-      required:true,
-      minors:{
-        type:[{type:String}],
-      }
-    }
-});
-
-module.exports=mongoose.model("Program",ProgramSchema);
 module.exports = mongoose.model("Minor", MinorSubjectSchema);;
 
 // const programName=new mongoose.Schema(
