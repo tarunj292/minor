@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -6,11 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
-import { getAllMinors } from '../actions/studentAction';
-
-
-
-// regular expression for phone number and seat number
+import { getAllMinors, createStudent } from '../actions/studentAction';
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -19,15 +15,49 @@ const Form = () => {
         memberID: '',
         seatNum: '',
         program: '',
-        phoneNum: null,
+        phoneNum: '',
         profCourse: '',
         langCourse: '',
         minorCourse: ''
     });
-
     const [alertMessage, setAlertMessage] = useState('')
-    const [severity, setSeverity] = useState('')
     const [alertOpen, setAlertOpen] = useState(false)
+    const [severity, setSeverity] = useState('')
+    const [cap, setCap] = useState([,])
+    const [minorCourseElement, setMinorCourseElement] = useState([]);
+
+    console.log("hi")
+
+    useEffect(() => { updateChange() }, [formData.minorCourse])
+    useEffect(() => { fetchData() }, [])
+
+    const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
+
+    let programMenuEl = programList.map(item => (
+        <MenuItem value={item}>{item}</MenuItem>
+    ))
+
+    const profCourseList = ["Hindi Language",
+        "Marathi Language",
+        "Sanskrit Language",
+        "Gujarati Language"]
+
+    let profCourseMenuEl = profCourseList.map(item => (
+        <MenuItem value={item}>{item}</MenuItem>
+    ))
+
+    const langCourseList = ["Chinese",
+        "French",
+        "german",
+        "spanish",
+        "urdu",
+        "Italian",
+        "japanese",
+        "Not interested"]
+
+    let langCourseMenuEl = profCourseList.map(item => (
+        <MenuItem value={item}>{item}</MenuItem>
+    ))
 
     const SimpleAlert = (alertMsg, paraSeverity) => {
         setAlertMessage(alertMsg)
@@ -39,27 +69,90 @@ const Form = () => {
         setAlertOpen(false)
     }
 
-    const handleChange = (event) => {
+    const handleChange = async (event) => {
         const { name, value } = event.target
+        console.log(name, value)
         setFormData(prevFormData => ({
             ...prevFormData,
             [name]: value
         }));
     };
 
+    const updateChange = async () => {
+        try {
+            const res = await getAllMinors();
+
+            res.data.map(item => {
+                console.log(formData.minorCourse)
+                if (item.courseName === formData.minorCourse) {
+
+                    setCap([item.capacity, item.remainingCapacity])
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const handleSubmit = (event) => {
-        const regex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
-        if (regex.test(formData.email)) {
-            console.log("Right")
-            SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
+        const seatNumRegex = /^\d{11}$/;
+        const phoneNumRegex = /^\d{10}$/;
+        const memberIDRegex = /^\d{10}$/;
+        if (emailRegex.test(formData.email)) {
+            if (seatNumRegex.test(formData.seatNum)) {
+                if (phoneNumRegex.test(formData.phoneNum)) {
+                    if (memberIDRegex.test(formData.memberID)) {
+                        const data =
+                        {
+                            name: formData.name,
+                            email: formData.email,
+                            seatno: formData.seatNum,
+                            mobileno: formData.phoneNum,
+                            memberid: formData.memberID,
+                            programName: formData.program,
+                            professionalcourse: formData.profCourse,
+                            language: formData.langCourse,
+                            minorSubject: formData.minorCourse
+                        }
+
+                        createStudent(JSON.stringify(data)).then(response => {
+                            console.log(response);
+                            updateChange()
+                            SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
+                        }).catch(err => console.error(err));
+                    } else {
+                        SimpleAlert("Enter Correct Member ID", "error") //Enter 11 Digit Seat Number Correctly
+                    }
+                } else {
+                    SimpleAlert("Enter Correct Phone Number", "error") //Enter 11 Digit Seat Number Correctly
+                }
+            } else {
+                SimpleAlert("Enter Correct Seat Number", "error") //Enter 11 Digit Seat Number Correctly
+            }
         } else {
-            console.error("Error")
-            SimpleAlert("Enter somaiya id", "error")
+            SimpleAlert("Enter Somaiya Email id", "error")
         }
         event.preventDefault();
-        // Handle form submission logic here
     };
-    useEffect(()=>{getAllMinors().then(response=>console.log(response))},[])
+
+    const fetchData = async () => {
+        try {
+            const res = await getAllMinors();
+
+            const transformedData = res.data.map(item => (
+                {
+                    value: item.courseName,
+                    label: item.courseName,
+                    capacity: item.capacity,
+                    remainCap: item.remainingCapacity,
+                    disabled: item.remainingCapacity === 0 ? true : false
+                }));
+            setMinorCourseElement(transformedData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <>
@@ -113,9 +206,7 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <MenuItem value={"BSC CS"}>BSC CS</MenuItem>
-                                <MenuItem value={"BAF"}>BAF</MenuItem>
-                                <MenuItem value={"BMS"}>BMS</MenuItem>
+                                {programMenuEl}
                             </Select>
                         </FormControl>
                     </Box>
@@ -136,13 +227,13 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <MenuItem value={"UI / UX"}>UI/UX</MenuItem>
-                                <MenuItem value={"Finance"}>Finance</MenuItem>
-                                <MenuItem value={"Yoga"}>Yoga</MenuItem>
+                                {minorCourseElement.map((option, index) => (
+                                    <MenuItem key={index} value={option.value} disabled={option.disabled}>{option.value}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </Box>
-
+                    {cap[0] && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Seats: {cap[0]} {";"}   Available Seats: {cap[1]}<br /></div>}
                     <label htmlFor="profCourse" className="form-label">Select Professional Course:</label>
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                         <FormControl fullWidth>
@@ -156,9 +247,7 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <MenuItem value={"Hindi Language"}>Hindi Language</MenuItem>
-                                <MenuItem value={"Marathi Language"}>Marathi Language</MenuItem>
-                                <MenuItem value={"Sanskrit Language"}>Sanskrit Language</MenuItem>
+                                {profCourseMenuEl}
                             </Select>
                         </FormControl>
                     </Box>
@@ -176,9 +265,7 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <MenuItem value={"French"}>French</MenuItem>
-                                <MenuItem value={"German"}>German</MenuItem>
-                                <MenuItem value={"Not Interested"}>Not Interested</MenuItem>
+                                { }
                             </Select>
                         </FormControl>
                     </Box>
