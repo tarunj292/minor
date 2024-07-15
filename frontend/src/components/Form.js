@@ -71,7 +71,6 @@ const Form = () => {
 
     const handleChange = async (event) => {
         const { name, value } = event.target
-        console.log(name, value)
         setFormData(prevFormData => ({
             ...prevFormData,
             [name]: value
@@ -83,7 +82,6 @@ const Form = () => {
             const res = await getAllMinors();
 
             res.data.map(item => {
-                console.log(formData.minorCourse)
                 if (item.courseName === formData.minorCourse) {
 
                     setCap([item.capacity, item.remainingCapacity])
