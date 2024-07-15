@@ -1,78 +1,78 @@
 [
   {
-    "courseName": "Minor program in Accounting",
+    "courseName": "Minor in Accounting",
     "capacity": 60
   },
   {
-    "courseName": "Minor program in Finance",
+    "courseName": "Minor in Finance",
     "capacity": 60
   },
   {
-    "courseName": "Minor program in Taxation",
+    "courseName": "Minor in Taxation",
     "capacity": 60
   },
   {
-    "courseName": "Minor program in Banking",
+    "courseName": "Minor in Banking",
     "capacity": 60
   },
   {
-    "courseName": "Minor program in Psychology",
+    "courseName": "Minor in Psychology",
     "capacity": 60
   },
   {
-    "courseName": "Minor program in Financial Market",
+    "courseName": "Minor in Financial Market",
     "capacity": 80
   },
   {
-    "courseName": "Minor program in Economics",
+    "courseName": "Minor in Economics",
     "capacity": 60
   },
   {
-    "courseName": "Minor program in Mass Communication",
+    "courseName": "Minor in Mass Communication",
     "capacity": 60
   },
   {
-    "courseName": "Minor program in bioinformatics and Omics",
+    "courseName": "Minor in bioinformatics and Omics",
     "capacity": 40
   },
   {
-    "courseName": "Minor program in Nanotechnology and IPR",
+    "courseName": "Minor in Nanotechnology and IPR",
     "capacity": 40
   },
   {
-    "courseName": "Minor program in Biotechnology",
+    "courseName": "Minor in Biotechnology",
     "capacity": 40
   },
   {
-    "courseName": "Minor program in Data Science and Analytics",
+    "courseName": "Minor in Data Science and Analytics",
     "capacity": 150
   },
   {
-    "courseName": "Minor program in Embedded system & IOT",
+    "courseName": "Minor in Embedded system & IOT",
     "capacity": 40
   },
   {
-    "courseName": "Minor program in Cyber Security",
+    "courseName": "Minor in Cyber Security",
     "capacity": 150
   },
   {
-    "courseName": "Minor program in UI/UX",
+    "courseName": "Minor in UI/UX",
     "capacity": 80
   },
   {
-    "courseName": "Minor program in Marketing",
+    "courseName": "Minor in Marketing",
     "capacity": 120
   },
   {
-    "courseName": "Minor program in Management",
+    "courseName": "Minor in Management",
     "capacity": 120
   },
   {
-    "courseName": "Minor program in Yoga",
+    "courseName": "Minor in Yoga",
     "capacity": 40
   },
   {
-    "courseName": "Minor program in Indian Heritage",
+    "courseName": "Minor in Indian Heritage",
     "capacity": 40
   }
 ]
