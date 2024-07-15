@@ -34,7 +34,7 @@ const Form = () => {
     const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
 
     let programMenuEl = programList.map(item => (
-        <MenuItem value={item}>{item}</MenuItem>
+        <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
     const profCourseList = ["Hindi Language",
@@ -43,7 +43,7 @@ const Form = () => {
         "Gujarati Language"]
 
     let profCourseMenuEl = profCourseList.map(item => (
-        <MenuItem value={item}>{item}</MenuItem>
+        <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
     const langCourseList = ["Chinese",
@@ -56,7 +56,7 @@ const Form = () => {
         "Not interested"]
 
     let langCourseMenuEl = profCourseList.map(item => (
-        <MenuItem value={item}>{item}</MenuItem>
+        <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
     const SimpleAlert = (alertMsg, paraSeverity) => {
@@ -265,7 +265,7 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                { }
+                                {langCourseMenuEl}
                             </Select>
                         </FormControl>
                     </Box>
