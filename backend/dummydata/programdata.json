@@ -1,31 +1,570 @@
 [
+  {
+    "progName": "Bachelor of Arts (Mass Communication & Journalism)",
+    "minor": ["Minor program in Psychology","Minor program in accounting",
+"Minor program in Banking","Minor program in bioinformatics and Omics","Minor program in Financial Market","Minor program in Finance","Minor program in Taxation","Minor program in Yoga"]
+  },
+  {
+    "progName": "Bachelor of Business Administration",
+    "minor": ["Minor program in Cyber Security","Minor program in bioinformatics and Omics",
+    "Minor program in Biotechnology","Minor program in Cyber Security","Minor program in Data Science and Analytics","Minor program in Embedded system & IOT","Minor program in Indian Heritage","Minor program in Mass Communication","Minor program in Nanatechnology and IPR","Minor program in Psychology","Minor program in UI/UX","Minor program in Yoga"]
+  },
+  {
+    "progName": "Bachelor of Business Management",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Bachelor of Commerce (Accounting & Finance)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Bachelor of Commerce (Banking & Finance)",
+    "minor": ["Minor program in Cyber Security","Minor program in bioinformatics and Omics","Minor program in Biotechnology","Minor program in Cyber Security","Minor program in Data Science and Analytics","Minor program in Embedded system & IOT","Minor program in Indian Heritage","Minor program in Mass Communication","Minor program in Nanatechnology and IPR","Minor program in Psychology","Minor program in UI/UX","Minor program in Yoga"]
+  },
+  {
+    "progName": "Bachelor of Commerce (Financial Markets)",
+    "minor": ["Minor program in Cyber Security","Minor program in bioinformatics and Omics","Minor program in Biotechnology","Minor program in Cyber Security","Minor program in Data Science and Analytics","Minor program in Embedded system & IOT","Minor program in Indian Heritage","Minor program in Mass Communication","Minor program in Nanatechnology and IPR","Minor program in Psychology","Minor program in UI/UX","Minor program in Yoga"]
+  },
     {
-        "name":"",
-        "minors":["","","",""]
-    },
-    {
-        "name":"",
-        "minors":["","","",""]
-    },
-    {
-        "name":"",
-        "minors":["","","",""]
-    },
-    {
-        "name":"",
-        "minors":["","","",""]
-    },
-    {
-        "name":"",
-        "minors":["","","",""]
-    },
-    {
-        "name":"",
-        "minors":["","","",""]
-    },
-    {
-        "name":"",
-        "minors":["","","",""]
-    }
-
+    "progName": "Bachelor of Commerce (Specialization in Data Science)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Bachelor of Computer Applications",
+    "minor": ["Minor program in Economics","Minor program in accounting","Minor program in Banking",
+    "Minor program in bioinformatics and Omics","Minor program in Biotechnology",
+    "Minor program in Finance","Minor program in Financial Market","Minor program in Indian Heritage","Minor program in Management","Minor program in Marketing","Minor program in Yoga","Minor program in Mass Communication","Minor program in Psychology","Minor program in Taxation"]
+  },
+  {
+    "progName": "Bachelor of Science (Psychology)",
+    "minor":[
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Bachelor of Science (Computer Science)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Bachelor of Science (Economics)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Bachelor of Science (Information Technology)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Bachelor of Science (Biotechnology)",
+    "minor": [
+      "Minor program in accounting",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Banking",
+      "Minor program in Economics",
+      "Minor program in Yoga",
+      "Minor program in Taxation",
+      "Minor program in Psychology",
+      "Minor program in Mass Communication",
+      "Minor program in Marketing",
+      "Minor program in Management",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage"
+    ]
+  },
+  {
+    "progName": "Bachelor of Science (Data Science)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Integrated Bachelor of Science-Master of Science",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Arts (China Studies)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Arts (Economics)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Arts (Entertainment Media & Advertising)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Arts (International Studies)",
+    "minor": [
+      "Minor program in accounting",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Banking",
+      "Minor program in Economics",
+      "Minor program in Yoga",
+      "Minor program in Taxation",
+      "Minor program in Mass Communication",
+      "Minor program in Marketing",
+      "Minor program in Management",
+      "Minor program in Finance",
+      "Minor program in Financial Market"
+    ]
+  },
+  {
+    "progName": "Master of Arts (Communication & Journalism)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Commerce (Accounting & Finance)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Master of Commerce (Banking & Finance)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Master of Commerce (Business Management)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Master of Science (Biotechnology)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Science (Chemical Biology and Drug Design)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Science (Computer Science)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Science (Environmental Studies)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Master of Science (Industrial Biotechnology)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Science (Information Technology)",
+    "minor": [
+      "Minor program in Economics",
+      "Minor program in accounting",
+      "Minor program in Banking",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Finance",
+      "Minor program in Financial Market",
+      "Minor program in Indian Heritage",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Yoga",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in Taxation"
+    ]
+  },
+  {
+    "progName": "Master of Science (Mathematics)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Master of Science (Nutraceuticals)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Master of Science (Polymer Science)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Master of Science (Statistics)",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Bachelor of Commerce (Accounting & Finance) Honour",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Bachelor of Commerce Honour",
+    "minor": [
+      "Minor program in Cyber Security",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Biotechnology",
+      "Minor program in Cyber Security",
+      "Minor program in Data Science and Analytics",
+      "Minor program in Embedded system & IOT",
+      "Minor program in Indian Heritage",
+      "Minor program in Mass Communication",
+      "Minor program in Nanatechnology and IPR",
+      "Minor program in Psychology",
+      "Minor program in UI/UX",
+      "Minor program in Yoga"
+    ]
+  },
+  {
+    "progName": "Bachelor of Science (Information Technology) Honour",
+    "minor": [
+      "Minor program in accounting",
+      "Minor program in bioinformatics and Omics",
+      "Minor program in Banking",
+      "Minor program in Economics",
+      "Minor program in Yoga","Minor program in Taxation","Minor program in Psychology","Minor program in Mass Communication","Minor program in Marketing","Minor program in Management","Minor program in Finance","Minor program in Financial Market","Minor program in Indian Heritage"
+    ]
+  }
+  
 ]
