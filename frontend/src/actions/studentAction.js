@@ -13,6 +13,19 @@ export const getAllMinors = () => {
     .catch((err) => console.log("Error getting resource:", err));
 };
 
+export const getOneMinor = (courseName) => {
+  return fetch(`${ENDPOINT_URL}/getOneMinor/${courseName}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => { return response })
+    .then((response) => { return response.json() })
+    .catch((err) => console.log("Error getting resource:", err));
+};
+
 export const createStudent = (studentData) => {
   return fetch(`${ENDPOINT_URL}/createStudent`, {
     method: "PATCH",

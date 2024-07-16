@@ -1,5 +1,5 @@
 const MinorSchema = require("../models/MinorSchema");
-const progm=require("../models/ProgramSchema");
+const progm = require("../models/ProgramSchema")
 
 exports.createStudent = async (req, res) => {
   try {
@@ -42,6 +42,32 @@ exports.getAllMinors = async (req, res) => {
     });
   }
 };
+
+exports.getOneMinor = async (req, res) => {
+  try {
+    const courseName = req.params.courseName;
+
+    const Minor = await MinorSchema.findOne({ courseName: courseName })
+    res.status(200).json(Minor)
+  } catch (error) {
+    console.log(error)
+  }
+
+};
+
+exports.getOneMinorByID = (req, res) => {
+  MinorSchema.findById(req.params._id).then(response => {
+    console.log("Hi ", response)
+    res.send({
+      response
+    })
+  }).catch(err => {
+    res.send({
+      success: false,
+      error: err
+    })
+  })
+}
 
 exports.getAllPrograms = async (req, res) => {
   try {

@@ -50,7 +50,6 @@
     "progName": "Bachelor of Commerce (Accounting & Finance)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
@@ -93,8 +92,13 @@
   },
   {
     "progName": "Bachelor of Commerce (Specialization in Data Science)",
-    "minor": ["Minor program in Finance","Minor program in Management","Minor program in Marketing",
-      "Minor program in Biotechnology","Minor program in Taxation","Minor program in accounting",
+    "minor": [
+      "Minor program in Finance",
+      "Minor program in Management",
+      "Minor program in Marketing",
+      "Minor program in Biotechnology",
+      "Minor program in Taxation",
+      "Minor program in accounting",
       "Minor program in Banking",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
@@ -106,14 +110,12 @@
     "progName": "Bachelor of Commerce (Accounting & Finance) Honour",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -122,14 +124,12 @@
     "progName": "Bachelor of Commerce Honour",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -141,13 +141,11 @@
       "Minor program in Banking",
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -274,16 +272,13 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -292,16 +287,13 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -310,16 +302,13 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -328,15 +317,12 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -344,9 +330,7 @@
     "progName": "Master of Arts (International Studies)",
     "minor": [
       "Minor program in accounting",
-
       "Minor program in Banking",
-
       "Minor program in Yoga",
       "Minor program in Taxation",
       "Minor program in Mass Communication",
@@ -361,16 +345,13 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -378,14 +359,12 @@
     "progName": "Master of Commerce (Accounting & Finance)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -394,14 +373,12 @@
     "progName": "Master of Commerce (Banking & Finance)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -410,14 +387,12 @@
     "progName": "Master of Commerce (Business Management)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -427,15 +402,12 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -444,15 +416,12 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -463,7 +432,6 @@
       "Minor program in Banking",
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
@@ -478,14 +446,12 @@
     "progName": "Master of Science (Environmental Studies)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -495,15 +461,12 @@
     "minor": [
       "Minor program in accounting",
       "Minor program in Banking",
-
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
       "Minor program in Yoga",
       "Minor program in Mass Communication",
-
       "Minor program in Taxation"
     ]
   },
@@ -514,7 +477,6 @@
       "Minor program in Banking",
       "Minor program in Biotechnology",
       "Minor program in Finance",
-
       "Minor program in Indian Heritage",
       "Minor program in Management",
       "Minor program in Marketing",
@@ -529,14 +491,12 @@
     "progName": "Master of Science (Mathematics)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -545,14 +505,12 @@
     "progName": "Master of Science (Nutraceuticals)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -561,14 +519,12 @@
     "progName": "Master of Science (Polymer Science)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Data Science and Analytics",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]
@@ -577,13 +533,11 @@
     "progName": "Master of Science (Statistics)",
     "minor": [
       "Minor program in Cyber Security",
-
       "Minor program in Biotechnology",
       "Minor program in Cyber Security",
       "Minor program in Embedded system & IOT",
       "Minor program in Indian Heritage",
       "Minor program in Mass Communication",
-
       "Minor program in UI/UX",
       "Minor program in Yoga"
     ]

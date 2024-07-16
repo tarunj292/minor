@@ -34,7 +34,7 @@ const Form = () => {
     const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
 
     let programMenuEl = programList.map(item => (
-        <MenuItem value={item}>{item}</MenuItem>
+        <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
     const profCourseList = ["Hindi Language",
@@ -43,7 +43,7 @@ const Form = () => {
         "Gujarati Language"]
 
     let profCourseMenuEl = profCourseList.map(item => (
-        <MenuItem value={item}>{item}</MenuItem>
+        <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
     const langCourseList = ["Chinese",
@@ -56,7 +56,7 @@ const Form = () => {
         "Not interested"]
 
     let langCourseMenuEl = profCourseList.map(item => (
-        <MenuItem value={item}>{item}</MenuItem>
+        <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
     const SimpleAlert = (alertMsg, paraSeverity) => {
@@ -69,9 +69,8 @@ const Form = () => {
         setAlertOpen(false)
     }
 
-    const handleChange = async (event) => {
+    const handleChange = (event) => {//i have removed async from here I don't knew why it was here
         const { name, value } = event.target
-        console.log(name, value)
         setFormData(prevFormData => ({
             ...prevFormData,
             [name]: value
@@ -83,7 +82,6 @@ const Form = () => {
             const res = await getAllMinors();
 
             res.data.map(item => {
-                console.log(formData.minorCourse)
                 if (item.courseName === formData.minorCourse) {
 
                     setCap([item.capacity, item.remainingCapacity])
@@ -122,10 +120,10 @@ const Form = () => {
                             SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
                         }).catch(err => console.error(err));
                     } else {
-                        SimpleAlert("Enter Correct Member ID", "error") //Enter 11 Digit Seat Number Correctly
+                        SimpleAlert("Enter Correct Member ID", "error")
                     }
                 } else {
-                    SimpleAlert("Enter Correct Phone Number", "error") //Enter 11 Digit Seat Number Correctly
+                    SimpleAlert("Enter Correct Phone Number", "error")
                 }
             } else {
                 SimpleAlert("Enter Correct Seat Number", "error") //Enter 11 Digit Seat Number Correctly
