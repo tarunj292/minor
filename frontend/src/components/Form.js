@@ -69,7 +69,7 @@ const Form = () => {
         setAlertOpen(false)
     }
 
-    const handleChange = async (event) => {
+    const handleChange = (event) => {//i have removed async from here I don't knew why it was here
         const { name, value } = event.target
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -120,10 +120,10 @@ const Form = () => {
                             SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
                         }).catch(err => console.error(err));
                     } else {
-                        SimpleAlert("Enter Correct Member ID", "error") //Enter 11 Digit Seat Number Correctly
+                        SimpleAlert("Enter Correct Member ID", "error")
                     }
                 } else {
-                    SimpleAlert("Enter Correct Phone Number", "error") //Enter 11 Digit Seat Number Correctly
+                    SimpleAlert("Enter Correct Phone Number", "error")
                 }
             } else {
                 SimpleAlert("Enter Correct Seat Number", "error") //Enter 11 Digit Seat Number Correctly

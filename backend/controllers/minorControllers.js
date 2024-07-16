@@ -1,4 +1,5 @@
 const MinorSchema = require("../models/MinorSchema");
+const progm = require("../models/ProgramSchema")
 
 exports.createStudent = async (req, res) => {
   try {
@@ -42,18 +43,62 @@ exports.getAllMinors = async (req, res) => {
   }
 };
 
-// const getAllMinors = async (req, res) => {
-//   try {
-//     const minors = await MinorSchema.find()
-//     res.send({data:minors});
-//   } catch (error) {
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// };
-// const getAllMinors = async (req, res) => {
-//   await MinorSchema.find({}).then((minors) => {
-//     res.send({ data: minors });
-//   }).catch((error) => {
-//     res.status(500).send({ error: "Internal server error" });
-//   });
-// };
+exports.getOneMinor = async (req, res) => {
+  try {
+    const courseName = req.params.courseName;
+
+    const Minor = await MinorSchema.findOne({ courseName: courseName })
+    res.status(200).json(Minor)
+  } catch (error) {
+    console.log(error)
+  }
+
+};
+
+exports.getOneMinorByID = (req, res) => {
+  MinorSchema.findById(req.params._id).then(response => {
+    console.log("Hi ", response)
+    res.send({
+      response
+    })
+  }).catch(err => {
+    res.send({
+      success: false,
+      error: err
+    })
+  })
+}
+
+exports.getAllPrograms = async (req, res) => {
+  try {
+    const prgm = await progm.find();
+    res.send({
+      success: true,
+      data: prgm,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
+  }
+};
+
+exports.getStudentsByMinor = async (req, res) => {
+  try {
+    const minorName = req.params.minorName;
+    const minor = await MinorSchema.findOne({ courseName: minorName });
+    if (!minor) {
+      return res.status(404).send({ message: "Minor subject not found" });
+    }
+    res.send({
+      success: true,
+      data: minor.students,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
+  }
+};
