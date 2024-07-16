@@ -66,10 +66,6 @@ export const createStudent = (studentData) => {
       }
       return response.json();
     })
-    // .then(data => {
-    //   console.log('Success:', data);
-    //   return data; // You can handle the response data as needed
-    // })
     .catch(error => {
       console.error('Error adding student:', error);
       throw error;

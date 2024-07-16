@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
-import { getAllMinorByProgram, createStudent, getAllPrograms } from '../actions/studentAction';
+import { getAllMinorByProgram, createStudent, getAllPrograms, getOneMinor } from '../actions/studentAction';
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -30,26 +30,29 @@ const Form = () => {
     useEffect(() => { updateChange() }, [formData.minorCourse])
     useEffect(() => { fetchData(formData.program) }, [formData.program])
     useEffect(() => { fetchProgramData() }, [])
+    useEffect(() => { fetchMinorDetails(formData.minorCourse) }, [formData.minorCourse])
 
-    // const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
-
-    const profCourseList = ["Hindi Language",
+    const profCourseList = [
+        "Hindi Language",
         "Marathi Language",
         "Sanskrit Language",
-        "Gujarati Language"]
+        "Gujarati Language"
+    ]
 
     let profCourseMenuEl = profCourseList.map(item => (
         <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
-    const langCourseList = ["Chinese",
+    const langCourseList = [
+        "Chinese",
         "French",
         "german",
         "spanish",
         "urdu",
         "Italian",
         "japanese",
-        "Not interested"]
+        "Not interested"
+    ]
 
     let langCourseMenuEl = langCourseList.map(item => (
         <MenuItem key={item} value={item}>{item}</MenuItem>
@@ -65,7 +68,7 @@ const Form = () => {
         setAlertOpen(false)
     }
 
-    const handleChange = (event) => {//i have removed async from here I don't knew why it was here
+    const handleChange = (event) => {
         const { name, value } = event.target
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -76,10 +79,8 @@ const Form = () => {
     const updateChange = async () => {
         try {
             const res = await getAllMinorByProgram(formData.program);
-
             res.data.map(item => {
                 if (item.courseName === formData.minorCourse) {
-
                     setCap([item.capacity, item.remainingCapacity])
                 }
             });
@@ -109,7 +110,6 @@ const Form = () => {
                             language: formData.langCourse,
                             minorSubject: formData.minorCourse
                         }
-
                         createStudent(JSON.stringify(data)).then(response => {
                             updateChange()
                             SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
@@ -121,13 +121,22 @@ const Form = () => {
                     SimpleAlert("Enter Correct Phone Number", "error")
                 }
             } else {
-                SimpleAlert("Enter Correct Seat Number", "error") //Enter 11 Digit Seat Number Correctly
+                SimpleAlert("Enter Correct Seat Number", "error")
             }
         } else {
             SimpleAlert("Enter Somaiya Email id", "error")
         }
         event.preventDefault();
     };
+
+    const fetchMinorDetails = async (minor) => {
+        try {
+            const res = await getOneMinor(minor)
+            setCap([res.capacity, res.remainingCapacity])
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     const fetchProgramData = async () => {
         try {
@@ -148,7 +157,7 @@ const Form = () => {
     const fetchData = async (progName) => {
         try {
             const res = await getAllMinorByProgram(progName);
-
+            console.log(res)
             const transformedData = res.minor.map(item => (
                 {
                     value: item,
@@ -242,7 +251,9 @@ const Form = () => {
                             </Select>
                         </FormControl>
                     </Box>
+
                     {cap[0] && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Seats: {cap[0]} {";"}   Available Seats: {cap[1]}<br /></div>}
+
                     <label htmlFor="profCourse" className="form-label">Select Professional Course:</label>
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                         <FormControl fullWidth>
