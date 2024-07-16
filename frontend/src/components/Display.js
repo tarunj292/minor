@@ -14,19 +14,12 @@ const Display = () => {
     const [minorCourse, setMinorCourse] = useState('')
     const [stud, setStud] = useState([])
 
-<<<<<<< HEAD
-=======
-    console.log(stud)
->>>>>>> cd74ffd63b1eec0ce6268aaf66f79f98eddd30e9
     useEffect(() => { fetchMinorCourses() }, [])
     useEffect(() => { }, [minorCourse])
     const fetchOneMinor = async (courseName) => {
         try {
             const res = await getOneMinor(courseName)
-<<<<<<< HEAD
             console.log(res)
-=======
->>>>>>> cd74ffd63b1eec0ce6268aaf66f79f98eddd30e9
             const studArr = res.students.map(item => item)
             setStud(studArr)
         } catch (error) {
