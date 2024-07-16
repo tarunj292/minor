@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Minor = require("../models/MinorSchema");
-const { programSchema } = require('../models/MinorSchema');
-const program = mongoose.model('Program', programSchema);
+const ProgramSchema = require('../models/ProgramSchema');
 const minordata = require("../dummydata/minordata.json");
-const programdata=require("../dummydata/programdata.json");
+const programdata = require("../dummydata/programdata.json");
+
 
 require("dotenv").config({
   path: "../.env",
@@ -33,7 +33,7 @@ insertMany();
 
 const progrmdt = async () => {
   try {
-    await program.create(programdata);
+    await ProgramSchema.create(programdata);
     console.log("Data imported");
     console.log("Program Data Updated");
   } catch (err) {
