@@ -43,6 +43,21 @@ exports.getAllMinors = async (req, res) => {
   }
 };
 
+exports.getAllPrograms = async (req, res) => {
+  try {
+    const Programs = await ProgramSchema.find()
+    res.send({
+      success: true,
+      data: Programs,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
+  }
+};
+
 exports.getOneMinor = async (req, res) => {
   try {
     const courseName = req.params.courseName;
