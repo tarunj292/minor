@@ -1,5 +1,18 @@
 import { ENDPOINT_URL } from "../constants/constant";
 
+export const getAllPrograms = () => {
+  return fetch(`${ENDPOINT_URL}/getAllPrograms`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => { return response })
+    .then((response) => { return response.json() })
+    .catch((err) => console.log("Error getting resource:", err));
+};
+
 export const getAllMinorByProgram = (progName) => {
   return fetch(`${ENDPOINT_URL}/getAllMinorByProgram/${progName}`, {
     method: "GET",

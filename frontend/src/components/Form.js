@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
-import { getAllMinorByProgram, createStudent } from '../actions/studentAction';
+import { getAllMinorByProgram, createStudent, getAllPrograms } from '../actions/studentAction';
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -20,20 +20,18 @@ const Form = () => {
         langCourse: '',
         minorCourse: ''
     });
-    const [alertMessage, setAlertMessage] = useState('')
-    const [alertOpen, setAlertOpen] = useState(false)
-    const [severity, setSeverity] = useState('')
-    const [cap, setCap] = useState([,])
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [severity, setSeverity] = useState('');
+    const [cap, setCap] = useState([,]);
     const [minorCourseElement, setMinorCourseElement] = useState([]);
+    const [programMenuEl, setProgramMenuEl] = useState([]);
 
     useEffect(() => { updateChange() }, [formData.minorCourse])
     useEffect(() => { fetchData(formData.program) }, [formData.program])
+    useEffect(() => { fetchProgramData() }, [])
 
-    const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
-
-    let programMenuEl = programList.map(item => (
-        <MenuItem key={item} value={item}>{item}</MenuItem>
-    ))
+    // const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
 
     const profCourseList = ["Hindi Language",
         "Marathi Language",
@@ -53,7 +51,7 @@ const Form = () => {
         "japanese",
         "Not interested"]
 
-    let langCourseMenuEl = profCourseList.map(item => (
+    let langCourseMenuEl = langCourseList.map(item => (
         <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
@@ -131,12 +129,26 @@ const Form = () => {
         event.preventDefault();
     };
 
+    const fetchProgramData = async () => {
+        try {
+            const res = await getAllPrograms();
+            const programList = res.data.map(item =>
+                item.progName
+            );
+            let p = programList.map(item => (
+                <MenuItem key={item} value={item}>{item}</MenuItem>
+            ))
+            setProgramMenuEl(p)
+            console.log(programList)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     const fetchData = async (progName) => {
         try {
-            console.log(progName)
             const res = await getAllMinorByProgram(progName);
 
-            console.log(res.minor)
             const transformedData = res.minor.map(item => (
                 {
                     value: item,
