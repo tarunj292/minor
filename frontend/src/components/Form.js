@@ -138,6 +138,7 @@ const Form = () => {
         try {
             const res = await getAllMinors();
 
+            console.log(res)
             const transformedData = res.data.map(item => (
                 {
                     value: item.courseName,
