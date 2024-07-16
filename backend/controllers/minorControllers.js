@@ -43,6 +43,21 @@ exports.getAllMinors = async (req, res) => {
   }
 };
 
+exports.getAllPrograms = async (req, res) => {
+  try {
+    const Programs = await ProgramSchema.find()
+    res.send({
+      success: true,
+      data: Programs,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
+  }
+};
+
 exports.getOneMinor = async (req, res) => {
   try {
     const courseName = req.params.courseName;
@@ -52,7 +67,6 @@ exports.getOneMinor = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-
 };
 
 exports.getOneMinorByID = (req, res) => {
@@ -69,13 +83,11 @@ exports.getOneMinorByID = (req, res) => {
   })
 }
 
-exports.getAllPrograms = async (req, res) => {
+exports.getAllMinorByProgram = async (req, res) => {
   try {
-    const prgm = await progm.find();
-    res.send({
-      success: true,
-      data: prgm,
-    });
+    const progName = req.params.progName
+    const Minors = await ProgramSchema.findOne({ progName: progName });
+    res.status(200).json(Minors)
   } catch (err) {
     res.send({
       success: false,

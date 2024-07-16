@@ -9,18 +9,37 @@ import Select from '@mui/material/Select';
 //seat, program, name, email
 
 const Display = () => {
-
     const [minorCourseArr, setMinorCourseArr] = useState([])
     const [minorCourse, setMinorCourse] = useState('')
     const [stud, setStud] = useState([])
+    const [tableEl, setTableEl] = useState('')
+    const [minorDetails, setMinorDetails] = useState([])
 
     useEffect(() => { fetchMinorCourses() }, [])
-    useEffect(() => { }, [minorCourse])
+    useEffect(() => { updateStudTable() }, [stud])
+
+    const updateStudTable = () => {
+        const tableRows = stud.map((item, index) => (
+            <tr key={index} className="table-row">
+                <th scope="row">{index + 1}</th>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.seatno}</td>
+                <td>{item.memberid}</td>
+                <td>{item.mobileno}</td>
+                <td>{item.programName}</td>
+                <td>{item.language}</td>
+                <td>{item.professionalcourse}</td>
+            </tr>
+        ));
+        setTableEl(tableRows);
+    }
+
     const fetchOneMinor = async (courseName) => {
         try {
             const res = await getOneMinor(courseName)
-            console.log(res)
             const studArr = res.students.map(item => item)
+            setMinorDetails([res.capacity, res.remainingCapacity])
             setStud(studArr)
         } catch (error) {
             console.log(error)
@@ -41,6 +60,7 @@ const Display = () => {
     const handleChange = (event) => {
         setMinorCourse(event.target.value)
         fetchOneMinor(event.target.value)
+
     }
 
     return (
@@ -63,13 +83,31 @@ const Display = () => {
                     </Select>
                 </FormControl>
             </Box>
-            {stud.length > 0 && (
-                <div>
-                    {stud.map((item, index) =>
-                        <h1 key={index}>{item.name}</h1>
-                    )}
+            {minorDetails.length == 2 && <div style={{ marginTop: "30px", marginBottom: "30px", fontWeight: "bold" }}>Seats: {minorDetails[0]} {" And "}   Available Seats: {minorDetails[1]} Students Enrolled: {minorDetails[0] - minorDetails[1]}<br /></div>}
+            {stud.length === 0 ?
+                <div >
+                    No Students Enrolled
                 </div>
-            )}
+                :
+                <table className="table red">
+                    <thead>
+                        <tr className="red">
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Seat</th>
+                            <th scope="col">Member ID</th>
+                            <th scope="col">Mobile No.</th>
+                            <th scope="col">Program</th>
+                            <th scope="col">Language</th>
+                            <th scope="col">Prof. Course</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        {tableEl}
+                    </tbody>
+                </table>
+            }
         </>
     )
 }
