@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
-import { getAllMinors, createStudent } from '../actions/studentAction';
+import { getAllMinorByProgram, createStudent } from '../actions/studentAction';
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -26,10 +26,8 @@ const Form = () => {
     const [cap, setCap] = useState([,])
     const [minorCourseElement, setMinorCourseElement] = useState([]);
 
-    console.log("hi")
-
     useEffect(() => { updateChange() }, [formData.minorCourse])
-    useEffect(() => { fetchData() }, [])
+    useEffect(() => { fetchData(formData.program) }, [formData.program])
 
     const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
 
@@ -79,7 +77,7 @@ const Form = () => {
 
     const updateChange = async () => {
         try {
-            const res = await getAllMinors();
+            const res = await getAllMinorByProgram(formData.program);
 
             res.data.map(item => {
                 if (item.courseName === formData.minorCourse) {
@@ -115,7 +113,6 @@ const Form = () => {
                         }
 
                         createStudent(JSON.stringify(data)).then(response => {
-                            console.log(response);
                             updateChange()
                             SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
                         }).catch(err => console.error(err));
@@ -134,18 +131,19 @@ const Form = () => {
         event.preventDefault();
     };
 
-    const fetchData = async () => {
+    const fetchData = async (progName) => {
         try {
-            const res = await getAllMinors();
+            console.log(progName)
+            const res = await getAllMinorByProgram(progName);
 
-            console.log(res)
-            const transformedData = res.data.map(item => (
+            console.log(res.minor)
+            const transformedData = res.minor.map(item => (
                 {
-                    value: item.courseName,
-                    label: item.courseName,
-                    capacity: item.capacity,
-                    remainCap: item.remainingCapacity,
-                    disabled: item.remainingCapacity === 0 ? true : false
+                    value: item,
+                    label: item,
+                    // capacity: item.capacity,
+                    // remainCap: item.remainingCapacity,
+                    // disabled: item.remainingCapacity === 0 ? true : false
                 }));
             setMinorCourseElement(transformedData);
         } catch (error) {

@@ -1,5 +1,17 @@
 import { ENDPOINT_URL } from "../constants/constant";
 
+export const getAllMinorByProgram = (progName) => {
+  return fetch(`${ENDPOINT_URL}/getAllMinorByProgram/${progName}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+  }).then((response) => { return response })
+    .then((response) => { return response.json() })
+    .catch((err) => console.log("Error getting minors for this program:", err));
+}
+
 export const getAllMinors = () => {
   return fetch(`${ENDPOINT_URL}/getMinor`, {
     method: "GET",
