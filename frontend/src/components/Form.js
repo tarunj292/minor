@@ -110,9 +110,14 @@ const Form = () => {
                             language: formData.langCourse,
                             minorSubject: formData.minorCourse
                         }
-                        createStudent(JSON.stringify(data)).then(response => {
-                            updateChange()
-                            SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
+                        createStudent(JSON.stringify(data)).then(res => {
+                            console.log(res)
+                            if (res.success) {
+                                updateChange()
+                                SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
+                            } else {
+                                SimpleAlert(res.message, "error")
+                            }
                         }).catch(err => console.error(err));
                     } else {
                         SimpleAlert("Enter Correct Member ID", "error")
@@ -186,9 +191,9 @@ const Form = () => {
             </h1>
             <div style={{
                 display: "flex",
-                justifyContent: "left"
+                justifyContent: "center"
             }}>
-                <form style={{ margin: "3vh", marginLeft: "2vw", width: "200vw" }} onSubmit={handleSubmit}>
+                <form className="col-md-6 col-10" onSubmit={handleSubmit}>
                     <label htmlFor="name" className="form-label">Enter your Name:</label>
                     <input id="name" name="name" className="form-control" type="text" value={formData.name} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Name" required />
 
@@ -206,6 +211,7 @@ const Form = () => {
                     />
 
                     <label htmlFor="memberID" className="form-label">Enter your Member ID:</label>
+                    {<sup><span className="text-danger">*First Select Your Program</span></sup>}
                     <input id="memberID" name="memberID" className="form-control" type="text" value={formData.memberID} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter memberID" required />
 
                     <label htmlFor="seatNum" className="form-label">Enter your Seat Number:</label>
@@ -233,10 +239,12 @@ const Form = () => {
                     <input id="phoneNum" name="phoneNum" className="form-control" type="text" value={formData.phoneNum} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter your Phone Number" required />
 
                     <label htmlFor="minorCourse" className="form-label">Select Minor Course:</label>
+                    {formData.program === "" && <sup><span className="text-danger">*First Select Your Program</span></sup>}
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Minor</InputLabel>
                             <Select
+                                disabled={formData.program === "" ? true : false}
                                 labelId="demo-simple-select-label"
                                 id="minorCourse"
                                 value={formData.minorCourse}
@@ -252,7 +260,7 @@ const Form = () => {
                         </FormControl>
                     </Box>
 
-                    {cap[0] && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Seats: {cap[0]} {";"}   Available Seats: {cap[1]}<br /></div>}
+                    {cap[0] && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Total Seats: {cap[0]} {";"}   Available Seats: {cap[1]}<br /></div>}
 
                     <label htmlFor="profCourse" className="form-label">Select Professional Course:</label>
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>

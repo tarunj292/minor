@@ -5,6 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField'
 
 //seat, program, name, email
 
@@ -14,6 +15,7 @@ const Display = () => {
     const [stud, setStud] = useState([])
     const [tableEl, setTableEl] = useState('')
     const [minorDetails, setMinorDetails] = useState([])
+    const [searchQuery, setSearchQuery] = useState('')
 
     useEffect(() => { fetchMinorCourses() }, [])
     useEffect(() => { updateStudTable() }, [stud])
@@ -63,52 +65,70 @@ const Display = () => {
 
     }
 
+    const filteredData = stud?.filter((item) =>
+        item?.seatno?.includes(searchQuery)
+    );
+    console.log(filteredData)
     return (
-        <>
-            <label htmlFor="minorCourse" className="form-label">Select Minor Course:</label>
-            <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Minor</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="minorCourse"
-                        value={minorCourse}
-                        label="minorCourse"
-                        name="minorCourse"
-                        onChange={(event) => handleChange(event)}
-                    >
-                        {minorCourseArr.map((item, index) => (
-                            <MenuItem key={index} value={item}>{item}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </Box>
-            {minorDetails.length == 2 && <div style={{ marginTop: "30px", marginBottom: "30px", fontWeight: "bold" }}>Seats: {minorDetails[0]} {" And "}   Available Seats: {minorDetails[1]} Students Enrolled: {minorDetails[0] - minorDetails[1]}<br /></div>}
-            {stud.length === 0 ?
-                <div >
-                    No Students Enrolled
+        <div className="d-flex flex-wrap justify-content-center">
+            <div className="col-md-6 col-10">
+                <label htmlFor="minorCourse" className="form-label">Select Minor Course:</label>
+                <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Minor</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="minorCourse"
+                            value={minorCourse}
+                            label="minorCourse"
+                            name="minorCourse"
+                            onChange={(event) => handleChange(event)}
+                        >
+                            {minorCourseArr.map((item, index) => (
+                                <MenuItem key={index} value={item}>{item}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Box>
+
+                <div className="col-md-6 col-12 d-flex justify-content-end">
+                    <TextField
+                        className="col-12"
+                        type="text"
+                        id="outlined-basic"
+                        label="Search by Seat Number or Roll No..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                 </div>
-                :
-                <table className="table red">
-                    <thead>
-                        <tr className="red">
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Seat</th>
-                            <th scope="col">Member ID</th>
-                            <th scope="col">Mobile No.</th>
-                            <th scope="col">Program</th>
-                            <th scope="col">Language</th>
-                            <th scope="col">Prof. Course</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                        {tableEl}
-                    </tbody>
-                </table>
-            }
-        </>
+
+                {minorDetails.length == 2 && <div style={{ marginTop: "30px", marginBottom: "30px", fontWeight: "bold" }}>Total Seats: {minorDetails[0]} <br /> Available Seats: {minorDetails[1]} <br /> Students Enrolled: {minorDetails[0] - minorDetails[1]}<br /></div>}
+                {stud.length === 0 ?
+                    <div >
+                        No Students Enrolled
+                    </div>
+                    :
+                    <table className="table red">
+                        <thead>
+                            <tr className="red">
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Seat</th>
+                                <th scope="col">Member ID</th>
+                                <th scope="col">Mobile No.</th>
+                                <th scope="col">Program</th>
+                                <th scope="col">Language</th>
+                                <th scope="col">Prof. Course</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            {tableEl}
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
     )
 }
 
