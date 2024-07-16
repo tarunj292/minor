@@ -71,10 +71,10 @@ exports.getOneMinorByID = (req, res) => {
 
 exports.getAllPrograms = async (req, res) => {
   try {
-    const prgm = await progm.find();
+    const Program = await ProgramSchema.find();
     res.send({
       success: true,
-      data: prgm,
+      data: Program,
     });
   } catch (err) {
     res.send({
