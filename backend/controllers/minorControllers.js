@@ -52,7 +52,6 @@ exports.getOneMinor = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-
 };
 
 exports.getOneMinorByID = (req, res) => {
@@ -69,13 +68,11 @@ exports.getOneMinorByID = (req, res) => {
   })
 }
 
-exports.getAllPrograms = async (req, res) => {
+exports.getAllMinorByProgram = async (req, res) => {
   try {
-    const Program = await ProgramSchema.find();
-    res.send({
-      success: true,
-      data: Program,
-    });
+    const progName = req.params.progName
+    const Minors = await ProgramSchema.findOne({ progName: progName });
+    res.status(200).json(Minors)
   } catch (err) {
     res.send({
       success: false,
