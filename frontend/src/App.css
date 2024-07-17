@@ -1,0 +1,8 @@
+.table-row:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.red:hover {
+    background-color: red;
+}
