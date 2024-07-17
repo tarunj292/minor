@@ -16,14 +16,6 @@
     "capacity": 60
   },
   {
-    "courseName": "Minor in Psychology",
-    "capacity": 60
-  },
-  {
-    "courseName": "Minor in Financial Market",
-    "capacity": 80
-  },
-  {
     "courseName": "Minor in Economics",
     "capacity": 60
   },
@@ -50,10 +42,6 @@
   {
     "courseName": "Minor in Embedded system & IOT",
     "capacity": 40
-  },
-  {
-    "courseName": "Minor in Cyber Security",
-    "capacity": 150
   },
   {
     "courseName": "Minor in UI/UX",

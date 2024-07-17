@@ -1,6 +1,7 @@
 const MinorSchema = require("../models/MinorSchema");
 const ProgramSchema = require("../models/ProgramSchema")
 
+//working 
 exports.createStudent = async (req, res) => {
   try {
     const { name, email, seatno, mobileno, memberid, programName, professionalcourse, language, minorSubject } = req.body;
@@ -28,6 +29,7 @@ exports.createStudent = async (req, res) => {
   }
 };
 
+//working
 exports.getAllMinors = async (req, res) => {
   try {
     const minor = await MinorSchema.find()
@@ -55,6 +57,7 @@ exports.getOneMinor = async (req, res) => {
 
 };
 
+//working
 exports.getOneMinorByID = (req, res) => {
   MinorSchema.findById(req.params._id).then(response => {
     console.log("Hi ", response)
@@ -69,9 +72,10 @@ exports.getOneMinorByID = (req, res) => {
   })
 }
 
+//working
 exports.getAllPrograms = async (req, res) => {
   try {
-    const prgm = await progm.find();
+    const prgm = await ProgramSchema.find();
     res.send({
       success: true,
       data: prgm,
@@ -84,6 +88,7 @@ exports.getAllPrograms = async (req, res) => {
   }
 };
 
+//working
 exports.getAllStudentsByMinor = async (req, res) => {
   try {
     const minorName = req.params.minorName;

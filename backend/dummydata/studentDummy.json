@@ -1,0 +1,202 @@
+{
+  "students": [
+    {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "seatno": "001",
+      "mobileno": "1234567890",
+      "memberid": "M001",
+      "programName": "Bachelor of Arts (Mass Communication & Journalism)",
+      "professionalcourse": "Hindi",
+      "language": "English",
+      "minorSubject": "Minor in Accounting"
+    },
+    {
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "seatno": "002",
+      "mobileno": "9876543210",
+      "memberid": "M002",
+      "programName": "Bachelor of Business Administration",
+      "professionalcourse": "Marathi",
+      "language": "English",
+      "minorSubject": "Minor in Marketing"
+    },
+    {
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "seatno": "003",
+      "mobileno": "5555555555",
+      "memberid": "M003",
+      "programName": "Bachelor of Business Management",
+      "professionalcourse": "Spanish",
+      "language": "English",
+      "minorSubject": "Minor in Taxation"
+    },
+    {
+      "name": "Bob Williams",
+      "email": "bob.williams@example.com",
+      "seatno": "004",
+      "mobileno": "9999999999",
+      "memberid": "M004",
+      "programName": "Bachelor of Commerce (Accounting & Finance)",
+      "professionalcourse": "German",
+      "language": "English",
+      "minorSubject": "Minor in Banking"
+    },
+    {
+      "name": "Emily Davis",
+      "email": "emily.davis@example.com",
+      "seatno": "005",
+      "mobileno": "1111111111",
+      "memberid": "M005",
+      "programName": "Bachelor of Commerce (Banking & Finance)",
+      "professionalcourse": "Hindi",
+      "language": "English",
+      "minorSubject": "Minor in Psychology"
+    },
+    {
+      "name": "Michael Wilson",
+      "email": "michael.wilson@example.com",
+      "seatno": "006",
+      "mobileno": "2222222222",
+      "memberid": "M006",
+      "programName": "Bachelor of Commerce (Financial Markets)",
+      "professionalcourse": "Marathi",
+      "language": "English",
+      "minorSubject": "Minor in Banking"
+    },
+    {
+      "name": "Olivia Martinez",
+      "email": "olivia.martinez@example.com",
+      "seatno": "007",
+      "mobileno": "3333333333",
+      "memberid": "M007",
+      "programName": "Bachelor of Commerce (Specialization in Data Science)",
+      "professionalcourse": "Spanish",
+      "language": "English",
+      "minorSubject": "Minor in Economics"
+    },
+    {
+      "name": "James Anderson",
+      "email": "james.anderson@example.com",
+      "seatno": "008",
+      "mobileno": "4444444444",
+      "memberid": "M008",
+      "programName": "Bachelor of Computer Applications",
+      "professionalcourse": "German",
+      "language": "English",
+      "minorSubject": "Minor in Mass Communication"
+    },
+    {
+      "name": "Sophia Taylor",
+      "email": "sophia.taylor@example.com",
+      "seatno": "009",
+      "mobileno": "6666666666",
+      "memberid": "M009",
+      "programName": "Bachelor of Science (Psychology)",
+      "professionalcourse": "Hindi",
+      "language": "English",
+      "minorSubject": "Minor in Bioinformatics and Omics"
+    },
+    {
+      "name": "Daniel Brown",
+      "email": "daniel.brown@example.com",
+      "seatno": "010",
+      "mobileno": "7777777777",
+      "memberid": "M010",
+      "programName": "Bachelor of Science (Computer Science)",
+      "professionalcourse": "Marathi",
+      "language": "English",
+      "minorSubject": "Minor in Accounting"
+    },
+    {
+      "name": "Mia Clark",
+      "email": "mia.clark@example.com",
+      "seatno": "011",
+      "mobileno": "8888888888",
+      "memberid": "M011",
+      "programName": "Bachelor of Science (Economics)",
+      "professionalcourse": "Spanish",
+      "language": "English",
+      "minorSubject": "Minor in Biotechnology"
+    },
+    {
+      "name": "David Rodriguez",
+      "email": "david.rodriguez@example.com",
+      "seatno": "012",
+      "mobileno": "9999999999",
+      "memberid": "M012",
+      "programName": "Bachelor of Science (Information Technology)",
+      "professionalcourse": "German",
+      "language": "English",
+      "minorSubject": "Minor in Taxation"
+    },
+    {
+      "name": "Joseph Lee",
+      "email": "joseph.lee@example.com",
+      "seatno": "014",
+      "mobileno": "2222222222",
+      "memberid": "M014",
+      "programName": "Bachelor of Science (Data Science)",
+      "professionalcourse": "Marathi",
+      "language": "English",
+      "minorSubject": "Minor in Accounting"
+    },
+    {
+      "name": "Samantha Young",
+      "email": "samantha.young@example.com",
+      "seatno": "015",
+      "mobileno": "3333333333",
+      "memberid": "M015",
+      "programName": "Integrated Bachelor of Science-Master of Science",
+      "professionalcourse": "Spanish",
+      "language": "English",
+      "minorSubject": "Minor in UI/UX"
+    },
+    {
+      "name": "William Walker",
+      "email": "william.walker@example.com",
+      "seatno": "016",
+      "mobileno": "4444444444",
+      "memberid": "M016",
+      "programName": "Master of Arts (China Studies)",
+      "professionalcourse": "German",
+      "language": "English",
+      "minorSubject": "Minor in Marketing"
+    },
+    {
+      "name": "Victoria Lewis",
+      "email": "victoria.lewis@example.com",
+      "seatno": "017",
+      "mobileno": "5555555555",
+      "memberid": "M017",
+      "programName": "Master of Arts (Economics)",
+      "professionalcourse": "Hindi",
+      "language": "English",
+      "minorSubject": "Minor in Management"
+    },
+    {
+      "name": "Henry Turner",
+      "email": "henry.turner@example.com",
+      "seatno": "018",
+      "mobileno": "6666666666",
+      "memberid": "M018",
+      "programName": "Master of Arts (Entertainment Media & Advertising)",
+      "professionalcourse": "Marathi",
+      "language": "English",
+      "minorSubject": "Minor in Yoga"
+    },
+    {
+      "name": "Christopher Young",
+      "email": "christopher.young@example.com",
+      "seatno": "020",
+      "mobileno": "8888888888",
+      "memberid": "M020",
+      "programName": "Master of Arts (Communication & Journalism)",
+      "professionalcourse": "German",
+      "language": "English",
+      "minorSubject": "Minor in Statistics"
+    }
+  ]
+}
