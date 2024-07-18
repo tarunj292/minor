@@ -61,15 +61,12 @@ export const createStudent = (studentData) => {
     body: studentData
   })
     .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Network response was not ok');
+      // }
+      // console.log(response.json())
       return response.json();
     })
-    // .then(data => {
-    //   console.log('Success:', data);
-    //   return data; // You can handle the response data as needed
-    // })
     .catch(error => {
       console.error('Error adding student:', error);
       throw error;

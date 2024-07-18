@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
-import { getAllMinorByProgram, createStudent, getAllPrograms } from '../actions/studentAction';
+import { getAllMinorByProgram, createStudent, getAllPrograms, getOneMinor } from '../actions/studentAction';
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -27,29 +27,34 @@ const Form = () => {
     const [minorCourseElement, setMinorCourseElement] = useState([]);
     const [programMenuEl, setProgramMenuEl] = useState([]);
 
-    useEffect(() => { updateChange() }, [formData.minorCourse])
+    useEffect(() => {
+        updateChange()
+        fetchMinorDetails(formData.minorCourse)
+    }, [formData.minorCourse])
     useEffect(() => { fetchData(formData.program) }, [formData.program])
     useEffect(() => { fetchProgramData() }, [])
 
-    // const programList = ["Bachelor of Arts (Mass Communication & Journalism)", "Bachelor of Business Administration", "Bachelor of Business Management", "Bachelor of Commerce (Accounting & Finance)", "Bachelor of Commerce (Banking & Finance)", "Bachelor of Commerce (Financial Markets)", "Bachelor of Commerce (Specialization in Data Science)", "Bachelor of Computer Applications", "Bachelor of Science (Psychology)", "Bachelor of Science (Computer Science)", "Bachelor of Science (Economics)", "Bachelor of Science (Information Technology)", "Bachelor of Science (Biotechnology)", "Bachelor of Science (Data Science)", "Bachelor of Commerce (Accounting & Finance) Honour", "Bachelor of Commerce Honour", "Bachelor of Science (Information Technology) Honour"]
-
-    const profCourseList = ["Hindi Language",
+    const profCourseList = [
+        "Hindi Language",
         "Marathi Language",
         "Sanskrit Language",
-        "Gujarati Language"]
+        "Gujarati Language"
+    ]
 
     let profCourseMenuEl = profCourseList.map(item => (
         <MenuItem key={item} value={item}>{item}</MenuItem>
     ))
 
-    const langCourseList = ["Chinese",
+    const langCourseList = [
+        "Chinese",
         "French",
         "german",
         "spanish",
         "urdu",
         "Italian",
         "japanese",
-        "Not interested"]
+        "Not interested"
+    ]
 
     let langCourseMenuEl = langCourseList.map(item => (
         <MenuItem key={item} value={item}>{item}</MenuItem>
@@ -65,7 +70,7 @@ const Form = () => {
         setAlertOpen(false)
     }
 
-    const handleChange = (event) => {//i have removed async from here I don't knew why it was here
+    const handleChange = (event) => {
         const { name, value } = event.target
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -76,10 +81,8 @@ const Form = () => {
     const updateChange = async () => {
         try {
             const res = await getAllMinorByProgram(formData.program);
-
             res.data.map(item => {
                 if (item.courseName === formData.minorCourse) {
-
                     setCap([item.capacity, item.remainingCapacity])
                 }
             });
@@ -109,10 +112,14 @@ const Form = () => {
                             language: formData.langCourse,
                             minorSubject: formData.minorCourse
                         }
+                        createStudent(JSON.stringify(data)).then(res => {
 
-                        createStudent(JSON.stringify(data)).then(response => {
-                            updateChange()
-                            SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
+                            if (res.success) {
+                                updateChange()
+                                SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
+                            } else {
+                                SimpleAlert(res.message, "error")
+                            }
                         }).catch(err => console.error(err));
                     } else {
                         SimpleAlert("Enter Correct Member ID", "error")
@@ -121,13 +128,22 @@ const Form = () => {
                     SimpleAlert("Enter Correct Phone Number", "error")
                 }
             } else {
-                SimpleAlert("Enter Correct Seat Number", "error") //Enter 11 Digit Seat Number Correctly
+                SimpleAlert("Enter Correct Seat Number", "error")
             }
         } else {
             SimpleAlert("Enter Somaiya Email id", "error")
         }
         event.preventDefault();
     };
+
+    const fetchMinorDetails = async (minor) => {
+        try {
+            const res = await getOneMinor(minor)
+            setCap([res.capacity, res.remainingCapacity])
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     const fetchProgramData = async () => {
         try {
@@ -139,7 +155,6 @@ const Form = () => {
                 <MenuItem key={item} value={item}>{item}</MenuItem>
             ))
             setProgramMenuEl(p)
-            console.log(programList)
         } catch (error) {
             console.error(error);
         }
@@ -148,7 +163,6 @@ const Form = () => {
     const fetchData = async (progName) => {
         try {
             const res = await getAllMinorByProgram(progName);
-
             const transformedData = res.minor.map(item => (
                 {
                     value: item,
@@ -177,9 +191,9 @@ const Form = () => {
             </h1>
             <div style={{
                 display: "flex",
-                justifyContent: "left"
+                justifyContent: "center"
             }}>
-                <form style={{ margin: "3vh", marginLeft: "2vw", width: "200vw" }} onSubmit={handleSubmit}>
+                <form className="col-md-6 col-10" onSubmit={handleSubmit}>
                     <label htmlFor="name" className="form-label">Enter your Name:</label>
                     <input id="name" name="name" className="form-control" type="text" value={formData.name} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Name" required />
 
@@ -197,6 +211,7 @@ const Form = () => {
                     />
 
                     <label htmlFor="memberID" className="form-label">Enter your Member ID:</label>
+                    {<sup><span className="text-danger">*First Select Your Program</span></sup>}
                     <input id="memberID" name="memberID" className="form-control" type="text" value={formData.memberID} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter memberID" required />
 
                     <label htmlFor="seatNum" className="form-label">Enter your Seat Number:</label>
@@ -224,10 +239,12 @@ const Form = () => {
                     <input id="phoneNum" name="phoneNum" className="form-control" type="text" value={formData.phoneNum} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter your Phone Number" required />
 
                     <label htmlFor="minorCourse" className="form-label">Select Minor Course:</label>
+                    {formData.program === "" && <sup><span className="text-danger">*First Select Your Program</span></sup>}
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Minor</InputLabel>
                             <Select
+                                disabled={formData.program === "" ? true : false}
                                 labelId="demo-simple-select-label"
                                 id="minorCourse"
                                 value={formData.minorCourse}
@@ -242,7 +259,9 @@ const Form = () => {
                             </Select>
                         </FormControl>
                     </Box>
-                    {cap[0] && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Seats: {cap[0]} {";"}   Available Seats: {cap[1]}<br /></div>}
+
+                    {cap[0] && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Total Seats: {cap[0]} {";"}   Available Seats: {cap[1]}<br /></div>}
+
                     <label htmlFor="profCourse" className="form-label">Select Professional Course:</label>
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                         <FormControl fullWidth>

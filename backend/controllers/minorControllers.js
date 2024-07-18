@@ -5,26 +5,37 @@ exports.createStudent = async (req, res) => {
   try {
     const { name, email, seatno, mobileno, memberid, programName, professionalcourse, language, minorSubject } = req.body;
 
-    const minor = await MinorSchema.findOne({ courseName: minorSubject });
-    if (!minor) {
-      return res.status(404).send({ message: "Minor subject not found" });
+    const Minor = await MinorSchema.findOne({
+      "students.email": email
+    });
+
+    if (Minor) {
+      res.status(400).send({ success: false, message: "This student Already filled The Form" });
+    } else {
+
+      const minor = await MinorSchema.findOne({ courseName: minorSubject });
+
+      if (!minor) {
+        return res.status(404).send({ success: false, message: "Minor subject not found" });
+      }
+
+      const student = {
+        name,
+        email,
+        seatno,
+        mobileno,
+        memberid,
+        programName,
+        professionalcourse,
+        language,
+      };
+      minor.students.push(student);
+      minor.remainingCapacity--;
+      await minor.save();
+      res.status(201).send({ success: true, message: "Student registered under minor subject" });
     }
-    const student = {
-      name,
-      email,
-      seatno,
-      mobileno,
-      memberid,
-      programName,
-      professionalcourse,
-      language,
-    };
-    minor.students.push(student);
-    minor.remainingCapacity--;
-    await minor.save();
-    res.status(201).send({ message: "Student registered under minor subject" });
   } catch (error) {
-    res.status(400).send({ message: error.message });
+    res.status(400).send({ success: true, message: error.message });
   }
 };
 
@@ -71,7 +82,6 @@ exports.getOneMinor = async (req, res) => {
 
 exports.getOneMinorByID = (req, res) => {
   MinorSchema.findById(req.params._id).then(response => {
-    console.log("Hi ", response)
     res.send({
       response
     })
