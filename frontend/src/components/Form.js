@@ -27,10 +27,12 @@ const Form = () => {
     const [minorCourseElement, setMinorCourseElement] = useState([]);
     const [programMenuEl, setProgramMenuEl] = useState([]);
 
-    useEffect(() => { updateChange() }, [formData.minorCourse])
+    useEffect(() => {
+        updateChange()
+        fetchMinorDetails(formData.minorCourse)
+    }, [formData.minorCourse])
     useEffect(() => { fetchData(formData.program) }, [formData.program])
     useEffect(() => { fetchProgramData() }, [])
-    useEffect(() => { fetchMinorDetails(formData.minorCourse) }, [formData.minorCourse])
 
     const profCourseList = [
         "Hindi Language",
@@ -111,7 +113,7 @@ const Form = () => {
                             minorSubject: formData.minorCourse
                         }
                         createStudent(JSON.stringify(data)).then(res => {
-                            console.log(res)
+
                             if (res.success) {
                                 updateChange()
                                 SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
@@ -153,7 +155,6 @@ const Form = () => {
                 <MenuItem key={item} value={item}>{item}</MenuItem>
             ))
             setProgramMenuEl(p)
-            console.log(programList)
         } catch (error) {
             console.error(error);
         }
@@ -162,7 +163,6 @@ const Form = () => {
     const fetchData = async (progName) => {
         try {
             const res = await getAllMinorByProgram(progName);
-            console.log(res)
             const transformedData = res.minor.map(item => (
                 {
                     value: item,

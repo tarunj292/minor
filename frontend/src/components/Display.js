@@ -16,7 +16,7 @@ const Display = () => {
     const [tableEl, setTableEl] = useState('')
     const [minorDetails, setMinorDetails] = useState([])
     const [searchQuery, setSearchQuery] = useState('')
-
+    console.log("render")
     useEffect(() => { fetchMinorCourses() }, [])
     useEffect(() => { updateStudTable() }, [stud])
 
@@ -68,7 +68,7 @@ const Display = () => {
     const filteredData = stud?.filter((item) =>
         item?.seatno?.includes(searchQuery)
     );
-    console.log(filteredData)
+
     return (
         <div className="d-flex flex-wrap justify-content-center">
             <div className="col-md-6 col-10">
