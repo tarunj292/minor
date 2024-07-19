@@ -81,7 +81,8 @@ const Form = () => {
     const updateChange = async () => {
         try {
             const res = await getAllMinorByProgram(formData.program);
-            res.data.map(item => {
+            console.log('getAllMinorByProgram',res);
+            res.minor.map(item => {
                 if (item.courseName === formData.minorCourse) {
                     setCap([item.capacity, item.remainingCapacity])
                 }
@@ -91,48 +92,98 @@ const Form = () => {
         }
     }
 
-    const handleSubmit = (event) => {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
-        const seatNumRegex = /^\d{11}$/;
-        const phoneNumRegex = /^\d{10}$/;
-        const memberIDRegex = /^\d{10}$/;
-        if (emailRegex.test(formData.email)) {
-            if (seatNumRegex.test(formData.seatNum)) {
-                if (phoneNumRegex.test(formData.phoneNum)) {
-                    if (memberIDRegex.test(formData.memberID)) {
-                        const data =
-                        {
-                            name: formData.name,
-                            email: formData.email,
-                            seatno: formData.seatNum,
-                            mobileno: formData.phoneNum,
-                            memberid: formData.memberID,
-                            programName: formData.program,
-                            professionalcourse: formData.profCourse,
-                            language: formData.langCourse,
-                            minorSubject: formData.minorCourse
-                        }
-                        createStudent(JSON.stringify(data)).then(res => {
+    // const handleSubmit = (event) => {
+    //     const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
+    //     const seatNumRegex = /^\d{11}$/;
+    //     const phoneNumRegex = /^\d{10}$/;
+    //     const memberIDRegex = /^\d{10}$/;
+    //     if (emailRegex.test(formData.email)) {
+    //         if (seatNumRegex.test(formData.seatNum)) {
+    //             if (phoneNumRegex.test(formData.phoneNum)) {
+    //                 if (memberIDRegex.test(formData.memberID)) {
+    //                     const data =
+    //                     {
+    //                         name: formData.name,
+    //                         email: formData.email,
+    //                         seatno: formData.seatNum,
+    //                         mobileno: formData.phoneNum,
+    //                         memberid: formData.memberID,
+    //                         programName: formData.program,
+    //                         professionalcourse: formData.profCourse,
+    //                         language: formData.langCourse,
+    //                         minorSubject: formData.minorCourse
+    //                     }
+    //                     createStudent(JSON.stringify(data)).then(res => {
 
-                            if (res.success) {
-                                updateChange()
-                                SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
-                            } else {
-                                SimpleAlert(res.message, "error")
-                            }
-                        }).catch(err => console.error(err));
+    //                         if (res.success) {
+    //                             updateChange()
+    //                             SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
+    //                         } else {
+    //                             SimpleAlert(res.message, "error")
+    //                         }
+    //                     }).catch(err => console.error(err));
+    //                 } else {
+    //                     SimpleAlert("Enter Correct Member ID", "error")
+    //                 }
+    //             } else {
+    //                 SimpleAlert("Enter Correct Phone Number", "error")
+    //             }
+    //         } else {
+    //             SimpleAlert("Enter Correct Seat Number", "error")
+    //         }
+    //     } else {
+    //         SimpleAlert("Enter Somaiya Email id", "error")
+    //     }
+    //     event.preventDefault();
+    // };
+
+    const handleSubmit = (event) => {
+        if (cap[1] > 0) {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
+            const seatNumRegex = /^\d{11}$/;
+            const phoneNumRegex = /^\d{10}$/;
+            const memberIDRegex = /^\d{10}$/;
+            
+            if (emailRegex.test(formData.email)) {
+                if (seatNumRegex.test(formData.seatNum)) {
+                    if (phoneNumRegex.test(formData.phoneNum)) {
+                        if (memberIDRegex.test(formData.memberID)) {
+                            const data = {
+                                name: formData.name,
+                                email: formData.email,
+                                seatno: formData.seatNum,
+                                mobileno: formData.phoneNum,
+                                memberid: formData.memberID,
+                                programName: formData.program,
+                                professionalcourse: formData.profCourse,
+                                language: formData.langCourse,
+                                minorSubject: formData.minorCourse
+                            };
+    
+                            createStudent(JSON.stringify(data)).then(res => {
+                                if (res.success) {
+                                    updateChange();
+                                    SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success");
+                                } else {
+                                    SimpleAlert(res.message, "error");
+                                }
+                            }).catch(err => console.error(err));
+                        } else {
+                            SimpleAlert("Enter Correct Member ID", "error");
+                        }
                     } else {
-                        SimpleAlert("Enter Correct Member ID", "error")
+                        SimpleAlert("Enter Correct Phone Number", "error");
                     }
                 } else {
-                    SimpleAlert("Enter Correct Phone Number", "error")
+                    SimpleAlert("Enter Correct Seat Number", "error");
                 }
             } else {
-                SimpleAlert("Enter Correct Seat Number", "error")
+                SimpleAlert("Enter Somaiya Email id", "error");
             }
         } else {
-            SimpleAlert("Enter Somaiya Email id", "error")
+            SimpleAlert("Chosen minor is full. Please choose another minor.", "error");
         }
+        
         event.preventDefault();
     };
 
@@ -210,9 +261,9 @@ const Form = () => {
                         required
                     />
 
-                    <label htmlFor="memberID" className="form-label">Enter your Member ID:</label>
-                    {<sup><span className="text-danger">*First Select Your Program</span></sup>}
-                    <input id="memberID" name="memberID" className="form-control" type="text" value={formData.memberID} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter memberID" required />
+                    <label htmlFor="memberID" className="form-label">Enter your ID No:</label>
+                    {<sup><span className="text-success">On your ID Card</span></sup>}
+                    <input id="memberID" name="memberID" className="form-control" type="text" value={formData.memberID} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter ID No:" required />
 
                     <label htmlFor="seatNum" className="form-label">Enter your Seat Number:</label>
                     <input id="seatNum" name="seatNum" className="form-control" type="text" value={formData.seatNum} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Seat Number (11 digit)" required />
