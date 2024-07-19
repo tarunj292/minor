@@ -23,8 +23,8 @@ const Form = () => {
     const [alertMessage, setAlertMessage] = useState('');
     const [alertOpen, setAlertOpen] = useState(false);
     const [severity, setSeverity] = useState('');
-    const [cap, setCap] = useState([,]);
-    const [minorCourseElement, setMinorCourseElement] = useState([]);
+    const [cap, setCap] = useState();
+    const [minorCourseMenuEl, setMinorCourseMenuEl] = useState([]);
     const [programMenuEl, setProgramMenuEl] = useState([]);
 
     useEffect(() => {
@@ -81,10 +81,10 @@ const Form = () => {
     const updateChange = async () => {
         try {
             const res = await getAllMinorByProgram(formData.program);
-            console.log('getAllMinorByProgram',res);
+            console.log('getAllMinorByProgram', res);
             res.minor.map(item => {
                 if (item.courseName === formData.minorCourse) {
-                    setCap([item.capacity, item.remainingCapacity])
+                    setCap(item.remainingCapacity)
                 }
             });
         } catch (error) {
@@ -138,12 +138,12 @@ const Form = () => {
     // };
 
     const handleSubmit = (event) => {
-        if (cap[1] > 0) {
+        if (cap > 0) {
             const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
             const seatNumRegex = /^\d{11}$/;
             const phoneNumRegex = /^\d{10}$/;
             const memberIDRegex = /^\d{10}$/;
-            
+
             if (emailRegex.test(formData.email)) {
                 if (seatNumRegex.test(formData.seatNum)) {
                     if (phoneNumRegex.test(formData.phoneNum)) {
@@ -159,7 +159,7 @@ const Form = () => {
                                 language: formData.langCourse,
                                 minorSubject: formData.minorCourse
                             };
-    
+
                             createStudent(JSON.stringify(data)).then(res => {
                                 if (res.success) {
                                     updateChange();
@@ -183,14 +183,15 @@ const Form = () => {
         } else {
             SimpleAlert("Chosen minor is full. Please choose another minor.", "error");
         }
-        
+
         event.preventDefault();
     };
 
     const fetchMinorDetails = async (minor) => {
         try {
             const res = await getOneMinor(minor)
-            setCap([res.capacity, res.remainingCapacity])
+            setCap(res.remainingCapacity)
+            // code here ...........................................
         } catch (error) {
             console.error(error)
         }
@@ -218,11 +219,9 @@ const Form = () => {
                 {
                     value: item,
                     label: item,
-                    // capacity: item.capacity,
-                    // remainCap: item.remainingCapacity,
                     // disabled: item.remainingCapacity === 0 ? true : false
                 }));
-            setMinorCourseElement(transformedData);
+            setMinorCourseMenuEl(transformedData);
         } catch (error) {
             console.error(error);
         }
@@ -304,14 +303,14 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                {minorCourseElement.map((option, index) => (
-                                    <MenuItem key={index} value={option.value} disabled={option.disabled}>{option.value}</MenuItem>
+                                {minorCourseMenuEl.map((option, index) => (
+                                    <MenuItem key={index} value={option.value}>{option.value}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
                     </Box>
 
-                    {cap[0] && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Total Seats: {cap[0]} {";"}   Available Seats: {cap[1]}<br /></div>}
+                    {cap && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Available Seats: {cap}<br /></div>}
 
                     <label htmlFor="profCourse" className="form-label">Select Professional Course:</label>
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
