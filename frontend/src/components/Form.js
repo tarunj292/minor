@@ -245,7 +245,20 @@ const Form = () => {
             }}>
                 <form className="col-md-6 col-10" onSubmit={handleSubmit}>
                     <label htmlFor="name" className="form-label">Enter your Name:</label>
-                    <input id="name" name="name" className="form-control" type="text" value={formData.name} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Name" required />
+                    {/* <input id="name" name="name" className="form-control" type="text" value={formData.name} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Name" required /> */}
+                    <input
+                        id="name"
+                        name="name"
+                        className="form-control"
+                        type="text"
+                        value={formData.name}
+                        onChange={handleChange}
+                        style={{ marginBottom: "3vh" }}
+                        placeholder="Enter Name"
+                        pattern="[a-zA-Z\s]*"
+                        title="Please enter letters and spaces only"
+                        required
+                    />
 
                     <label htmlFor="email" className="form-label" >Enter your Email:</label>
                     <input
@@ -271,7 +284,7 @@ const Form = () => {
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Program</InputLabel>
-                            <Select
+                            <Select 
                                 labelId="demo-simple-select-label"
                                 id="program"
                                 value={formData.program}
@@ -284,6 +297,43 @@ const Form = () => {
                             </Select>
                         </FormControl>
                     </Box>
+
+                    {/* <Box>
+                        <label htmlFor="program" className="form-label">Select your Program:</label>
+                        <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Program</InputLabel>
+                                <Select  
+                                    autoWidth='true'
+                                    labelId="demo-simple-select-label"
+                                    id="program"
+                                    value={formData.program}
+                                    label="Program"
+                                    name="program"
+                                    onChange={handleChange}
+                                    MenuProps={{
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 300, // Adjust as needed
+                                            },
+                                        },
+                                        anchorOrigin: {
+                                            vertical: "bottom",
+                                            horizontal: "left"
+                                        },
+                                        transformOrigin: {
+                                            vertical: "top",
+                                            horizontal: "left"
+                                        },
+                                        getContentAnchorEl: null,
+                                    }}
+                                    required
+                                >
+                                    {programMenuEl}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </Box> */}
 
                     <label htmlFor="phoneNum" className="form-label">Enter your Phone Number:</label>
                     <input id="phoneNum" name="phoneNum" className="form-control" type="text" value={formData.phoneNum} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter your Phone Number" required />
