@@ -20,6 +20,13 @@ const Form = () => {
         langCourse: '',
         minorCourse: ''
     });
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        memberID: '',
+        seatNum: '',
+        phoneNum: ''
+    });
     const [alertMessage, setAlertMessage] = useState('');
     const [alertOpen, setAlertOpen] = useState(false);
     const [severity, setSeverity] = useState('');
@@ -32,9 +39,11 @@ const Form = () => {
         fetchMinorDetails(formData.minorCourse)
     }, [formData.minorCourse])
     useEffect(() => { fetchData(formData.program) }, [formData.program])
+    useEffect(() => { setErrors(validateDetails()) }, [formData])
     useEffect(() => { fetchProgramData() }, [])
 
     const profCourseList = [
+        "Professional Communication",
         "Hindi Language",
         "Marathi Language",
         "Sanskrit Language",
@@ -81,8 +90,7 @@ const Form = () => {
     const updateChange = async () => {
         try {
             const res = await getAllMinorByProgram(formData.program);
-            console.log('getAllMinorByProgram', res);
-            res.minor.map(item => {
+            res.minor.forEach(item => {
                 if (item.courseName === formData.minorCourse) {
                     setCap(item.remainingCapacity)
                 }
@@ -92,100 +100,43 @@ const Form = () => {
         }
     }
 
-    // const handleSubmit = (event) => {
-    //     const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
-    //     const seatNumRegex = /^\d{11}$/;
-    //     const phoneNumRegex = /^\d{10}$/;
-    //     const memberIDRegex = /^\d{10}$/;
-    //     if (emailRegex.test(formData.email)) {
-    //         if (seatNumRegex.test(formData.seatNum)) {
-    //             if (phoneNumRegex.test(formData.phoneNum)) {
-    //                 if (memberIDRegex.test(formData.memberID)) {
-    //                     const data =
-    //                     {
-    //                         name: formData.name,
-    //                         email: formData.email,
-    //                         seatno: formData.seatNum,
-    //                         mobileno: formData.phoneNum,
-    //                         memberid: formData.memberID,
-    //                         programName: formData.program,
-    //                         professionalcourse: formData.profCourse,
-    //                         language: formData.langCourse,
-    //                         minorSubject: formData.minorCourse
-    //                     }
-    //                     createStudent(JSON.stringify(data)).then(res => {
-
-    //                         if (res.success) {
-    //                             updateChange()
-    //                             SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success")
-    //                         } else {
-    //                             SimpleAlert(res.message, "error")
-    //                         }
-    //                     }).catch(err => console.error(err));
-    //                 } else {
-    //                     SimpleAlert("Enter Correct Member ID", "error")
-    //                 }
-    //             } else {
-    //                 SimpleAlert("Enter Correct Phone Number", "error")
-    //             }
-    //         } else {
-    //             SimpleAlert("Enter Correct Seat Number", "error")
-    //         }
-    //     } else {
-    //         SimpleAlert("Enter Somaiya Email id", "error")
-    //     }
-    //     event.preventDefault();
-    // };
-
     const handleSubmit = (event) => {
-        if (cap > 0) {
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
-            const seatNumRegex = /^\d{11}$/;
-            const phoneNumRegex = /^\d{10}$/;
-            const memberIDRegex = /^\d{10}$/;
-
-            if (emailRegex.test(formData.email)) {
-                if (seatNumRegex.test(formData.seatNum)) {
-                    if (phoneNumRegex.test(formData.phoneNum)) {
-                        if (memberIDRegex.test(formData.memberID)) {
-                            const data = {
-                                name: formData.name,
-                                email: formData.email,
-                                seatno: formData.seatNum,
-                                mobileno: formData.phoneNum,
-                                memberid: formData.memberID,
-                                programName: formData.program,
-                                professionalcourse: formData.profCourse,
-                                language: formData.langCourse,
-                                minorSubject: formData.minorCourse
-                            };
-
-                            createStudent(JSON.stringify(data)).then(res => {
-                                if (res.success) {
-                                    updateChange();
-                                    SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success");
-                                } else {
-                                    SimpleAlert(res.message, "error");
-                                }
-                            }).catch(err => console.error(err));
-                        } else {
-                            SimpleAlert("Enter Correct Member ID", "error");
-                        }
-                    } else {
-                        SimpleAlert("Enter Correct Phone Number", "error");
-                    }
-                } else {
-                    SimpleAlert("Enter Correct Seat Number", "error");
-                }
-            } else {
-                SimpleAlert("Enter Somaiya Email id", "error");
+        let error = true
+        let msg
+        for (const [, value] of Object.entries(errors)) {
+            if (value.length > 0) {
+                error = false;
+                msg = value;
+                break;
             }
-        } else {
-            SimpleAlert("Chosen minor is full. Please choose another minor.", "error");
         }
+        if (cap > 0 && error) {
+            const data = {
+                name: formData.name,
+                email: formData.email,
+                seatno: formData.seatNum,
+                mobileno: formData.phoneNum,
+                memberid: formData.memberID,
+                programName: formData.program,
+                professionalcourse: formData.profCourse,
+                language: formData.langCourse,
+                minorSubject: formData.minorCourse
+            };
 
+            createStudent(JSON.stringify(data)).then(res => {
+                if (res.success) {
+                    updateChange();
+                    SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success");
+                } else {
+                    SimpleAlert(res.message, "error");
+                }
+            }
+            )
+        } else {
+            SimpleAlert(("Type" + msg.slice(15, msg.length)), "error");
+        }
         event.preventDefault();
-    };
+    }
 
     const fetchMinorDetails = async (minor) => {
         try {
@@ -214,6 +165,46 @@ const Form = () => {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    const validateDetails = () => {
+        let errors = {
+            name: '',
+            email: '',
+            memberID: '',
+            seatNum: '',
+            phoneNum: ''
+        }
+        if (formData.name.length > 0) {
+            const nameRegex = /^[A-Za-z\s]+$/;
+            if (!nameRegex.test(formData.name)) {
+                errors.name = "❗Are you typing your name correctly?"
+            }
+        }
+        if (formData.email.length > 0) {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/;
+            if (!emailRegex.test(formData.email)) {
+                errors.email = "❗Are you typing your somaiya email correctly?"
+            }
+        }
+        if (formData.memberID.length > 0) {
+            const memberIDRegex = /^\d{10}$/;
+            if (!memberIDRegex.test(formData.memberID))
+                errors.memberID = "❗Are you typing your member ID correctly?"
+        }
+        if (formData.seatNum.length > 0) {
+            const seatNumRegex = /^\d{11}$/;
+            if (!seatNumRegex.test(formData.seatNum))
+                errors.seatNum = "❗Are you typing your seat number correctly?"
+        }
+
+        if (formData.phoneNum.length > 0) {
+            const phoneNumRegex = /^\d{10}$/;
+            if (!phoneNumRegex.test(formData.phoneNum))
+                errors.phoneNum = "❗Are you typing your phone number correctly?"
+        }
+
+        return errors
     }
 
     const fetchData = async (progName) => {
@@ -248,8 +239,24 @@ const Form = () => {
                 justifyContent: "center"
             }}>
                 <form className="col-md-6 col-10" onSubmit={handleSubmit}>
+
                     <label htmlFor="name" className="form-label">Enter your Name:</label>
-                    <input id="name" name="name" className="form-control" type="text" value={formData.name} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Name" required />
+                    <input
+                        id="name"
+                        name="name"
+                        className="form-control"
+                        type="text"
+                        value={formData.name}
+                        onChange={handleChange}
+                        style={{
+                            marginBottom: "3vh",
+                            border: errors.name ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            boxShadow: errors.name ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
+                        }}
+                        placeholder="Enter Name"
+                        required
+                    />
+                    {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
 
                     <label htmlFor="email" className="form-label" >Enter your Email:</label>
                     <input
@@ -259,17 +266,52 @@ const Form = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        style={{ marginBottom: "3vh" }}
+                        style={{
+                            marginBottom: "3vh",
+                            border: errors.email ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            boxShadow: errors.email ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
+                        }}
                         placeholder="Somaiya Email"
                         required
                     />
+                    {errors.email.length > 0 && <p style={{ color: "red" }}>{errors.email}</p>}
 
                     <label htmlFor="memberID" className="form-label">Enter your ID No:</label>
                     {<sup><span className="text-success">On your ID Card</span></sup>}
-                    <input id="memberID" name="memberID" className="form-control" type="text" value={formData.memberID} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter ID No:" required />
+                    <input
+                        id="memberID"
+                        name="memberID"
+                        className="form-control"
+                        type="text"
+                        value={formData.memberID}
+                        onChange={handleChange}
+                        style={{
+                            marginBottom: "3vh",
+                            border: errors.memberID ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            boxShadow: errors.memberID ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
+                        }}
+                        placeholder="Enter ID No:"
+                        required
+                    />
+                    {errors.memberID.length > 0 && <p style={{ color: "red" }}>{errors.memberID}</p>}
 
                     <label htmlFor="seatNum" className="form-label">Enter your Seat Number:</label>
-                    <input id="seatNum" name="seatNum" className="form-control" type="text" value={formData.seatNum} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter Seat Number (11 digit)" required />
+                    <input
+                        id="seatNum"
+                        name="seatNum"
+                        className="form-control"
+                        type="text"
+                        value={formData.seatNum}
+                        onChange={handleChange}
+                        style={{
+                            marginBottom: "3vh",
+                            border: errors.seatNum ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            boxShadow: errors.seatNum ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
+                        }}
+                        placeholder="Enter Seat Number (11 digit)"
+                        required
+                    />
+                    {errors.seatNum.length > 0 && <p style={{ color: "red" }}>{errors.seatNum}</p>}
 
                     <label htmlFor="program" className="form-label">Select your Program:</label>
                     <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
@@ -290,7 +332,22 @@ const Form = () => {
                     </Box>
 
                     <label htmlFor="phoneNum" className="form-label">Enter your Phone Number:</label>
-                    <input id="phoneNum" name="phoneNum" className="form-control" type="text" value={formData.phoneNum} onChange={handleChange} style={{ marginBottom: "3vh" }} placeholder="Enter your Phone Number" required />
+                    <input
+                        id="phoneNum"
+                        name="phoneNum"
+                        className="form-control"
+                        type="text"
+                        value={formData.phoneNum}
+                        onChange={handleChange}
+                        style={{
+                            marginBottom: "3vh",
+                            border: errors.phoneNum ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            boxShadow: errors.phoneNum ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
+                        }}
+                        placeholder="Enter your Phone Number"
+                        required
+                    />
+                    {errors.phoneNum.length > 0 && <p style={{ color: "red" }}>{errors.phoneNum}</p>}
 
                     <label htmlFor="minorCourse" className="form-label">Select Minor Course:</label>
                     {formData.program === "" && <sup><span className="text-danger">*First Select Your Program</span></sup>}
