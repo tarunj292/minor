@@ -191,7 +191,11 @@ const Form = () => {
         try {
             const res = await getOneMinor(minor)
             setCap(res.remainingCapacity)
-            // code here ...........................................
+            setMinorCourseMenuEl((prevMinorCourseMenuEl) =>
+                prevMinorCourseMenuEl.map((item) =>
+                    item.value === minor ? { ...item, disabled: res.remainingCapacity <= 0 } : item
+                )
+            );
         } catch (error) {
             console.error(error)
         }
@@ -219,7 +223,7 @@ const Form = () => {
                 {
                     value: item,
                     label: item,
-                    // disabled: item.remainingCapacity === 0 ? true : false
+                    disabled: false
                 }));
             setMinorCourseMenuEl(transformedData);
         } catch (error) {
@@ -304,7 +308,7 @@ const Form = () => {
                                 required
                             >
                                 {minorCourseMenuEl.map((option, index) => (
-                                    <MenuItem key={index} value={option.value}>{option.value}</MenuItem>
+                                    <MenuItem key={index} value={option.value} disabled={option.disabled} >{option.value}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
