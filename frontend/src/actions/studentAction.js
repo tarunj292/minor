@@ -72,3 +72,36 @@ export const createStudent = (studentData) => {
       throw error;
     });
 }
+
+export const getAllLanguages = () => {
+  return fetch(`${ENDPOINT_URL}/getAllLanguages`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => { return response })
+    .then((response) => { return response.json() })
+    .catch((err) => console.log("Error getting Languages", err));
+};
+
+export const getAllProfessionalCourses = () => {
+  return fetch(`${ENDPOINT_URL}/getAllProfessionalCourses`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      console.error("Error getting prof courses", err);
+      throw err; // Rethrow the error to propagate it
+    });
+};
