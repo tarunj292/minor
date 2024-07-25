@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 const Minor = require("../models/MinorSchema");
 const ProgramSchema = require('../models/ProgramSchema');
+const LanguagesSchema = require("../models/LanguagesSchema");
+const ProfessionalCourse = require("../models/ProfessionalCourse")
 const minordata = require("../dummydata/minordata.json");
 const programdata = require("../dummydata/programdata.json");
+const langdata = require("../dummydata/language.json");
+const profCourseData = require("../dummydata/professionalcourses.json")
 
 
 require("dotenv").config({
@@ -42,3 +46,23 @@ const progrmdt = async () => {
   process.exit();
 };
 progrmdt();
+
+const insertLanguages = async () => {
+  try {
+    await LanguagesSchema.insertMany(langdata);
+    console.log("Language Data imported successfully");
+  } catch (err) {
+    console.error("Error importing Language Data:", err);
+  } 
+};
+insertLanguages();
+
+const insertProfessionalCourses = async () => {
+  try {
+    await ProfessionalCourse.insertMany(profCourseData);
+    console.log("Professional Courses Data imported successfully");
+  } catch (err) {
+    console.error("Error importing Professional Courses Data:", err);
+  }
+};
+insertProfessionalCourses();

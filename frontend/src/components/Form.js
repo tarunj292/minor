@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
-import { getAllMinorByProgram, createStudent, getAllPrograms, getOneMinor } from '../actions/studentAction';
+import { getAllMinorByProgram, createStudent, getAllPrograms, getOneMinor, getAllLanguages, getAllProfessionalCourses } from '../actions/studentAction';
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -33,41 +33,46 @@ const Form = () => {
     const [cap, setCap] = useState();
     const [minorCourseMenuEl, setMinorCourseMenuEl] = useState([]);
     const [programMenuEl, setProgramMenuEl] = useState([]);
+    //testing
+    const [langCourseList, setlang] = useState([])
+    const [profCourseList, setProfCourse] = useState([])
 
     useEffect(() => {
         updateChange()
         fetchMinorDetails(formData.minorCourse)
+        fetchLanguages()
+        fetchProfCourses()
     }, [formData.minorCourse])
     useEffect(() => { fetchData(formData.program) }, [formData.program])
     useEffect(() => { setErrors(validateDetails()) }, [formData])
     useEffect(() => { fetchProgramData() }, [])
 
-    const profCourseList = [
-        "Professional Communication",
-        "Hindi Language",
-        "Marathi Language",
-        "Sanskrit Language",
-        "Gujarati Language"
-    ]
+    // const profCourseList = [
+    //     "Professional Communication",
+    //     "Hindi Language",
+    //     "Marathi Language",
+    //     "Sanskrit Language",
+    //     "Gujarati Language"
+    // ]
 
-    let profCourseMenuEl = profCourseList.map(item => (
-        <MenuItem sx={{ whiteSpace: 'normal' }} key={item} value={item}>{item}</MenuItem>
-    ))
+    // let profCourseMenuEl = profCourseList.map(item => (
+    //     <MenuItem key={item} value={item}>{item}</MenuItem>
+    // ))
 
-    const langCourseList = [
-        "Chinese",
-        "French",
-        "german",
-        "spanish",
-        "urdu",
-        "Italian",
-        "japanese",
-        "Not interested"
-    ]
+    // const langCourseList = [
+    //     "Chinese",
+    //     "French",
+    //     "german",
+    //     "spanish",
+    //     "urdu",
+    //     "Italian",
+    //     "japanese",
+    //     "Not interested"
+    // ]
 
-    let langCourseMenuEl = langCourseList.map(item => (
-        <MenuItem sx={{ whiteSpace: 'normal' }} key={item} value={item}>{item}</MenuItem>
-    ))
+    // let langCourseMenuEl = langCourseList.map(item => (
+    //     <MenuItem key={item} value={item}>{item}</MenuItem>
+    // ))
 
     const SimpleAlert = (alertMsg, paraSeverity) => {
         setAlertMessage(alertMsg)
@@ -162,20 +167,58 @@ const Form = () => {
         }
     }
 
+    const fetchLanguages = async () => {
+        try {
+            const res = await getAllLanguages();
+            const languageList = res.data.map(item => item.langCourseList);
+            setlang(languageList);
+            console.log('languages', languageList);
+        } catch (err) {
+            console.error('error getting languages', err);
+        }
+    }
+
+    const fetchProfCourses = async () => {
+        try {
+            const res = await getAllProfessionalCourses();
+            const profCourseData = res.data.map(item => item.profCourse);
+            setProfCourse(profCourseData);
+            console.log('prof courses ', profCourseData);
+        } catch (err) {
+            console.error('error getting programs', err);
+        }
+    }
+
+
+
+    // const fetchProgramData = async () => {
+    //     try {
+    //         const res = await getAllPrograms();
+    //         const programList = res.data.map(item =>
+    //             item.progName
+    //         );
+    //         let p = programList.map(item => (
+    //             <MenuItem key={item} value={item}>{item}</MenuItem>
+    //         ))
+    //         setProgramMenuEl(p)
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
     const fetchProgramData = async () => {
         try {
             const res = await getAllPrograms();
-            const programList = res.data.map(item =>
-                item.progName
-            );
-            let p = programList.map(item => (
-                <MenuItem sx={{ whiteSpace: 'normal' }} key={item} value={item}>{item}</MenuItem>
-            ))
-            setProgramMenuEl(p)
+            const programList = res.data.map(item => ({
+                value: item.progName,
+                label: item.progName  // Assuming progName is both value and label
+            }));
+            setProgramMenuEl(programList);
         } catch (error) {
             console.error(error);
         }
-    }
+    };
+
+
 
     const validateDetails = () => {
         let errors = {
@@ -346,11 +389,69 @@ const Form = () => {
                                 name="program"
                                 onChange={handleChange}
                                 required
+                                MenuProps={{
+                                    PaperProps: {
+                                        style: {
+                                            maxHeight: 300, // Adjust as needed
+                                        },
+                                    },
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left"
+                                    },
+                                    transformOrigin: {
+                                        vertical: "top",
+                                        horizontal: "left"
+                                    },
+                                    getContentAnchorEl: null,
+                                }}
                             >
-                                {programMenuEl}
+                                {/* {programMenuEl} */}
+                                {programMenuEl.map((item, index) => (
+                                    <MenuItem key={item.value} value={item.value} style={{ whiteSpace: 'normal' }}>
+                                        {item.label}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </Box>
+
+                    {/* <Box>
+                        <label htmlFor="program" className="form-label">Select your Program:</label>
+                        <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Program</InputLabel>
+                                <Select  
+                                    autoWidth='true'
+                                    labelId="demo-simple-select-label"
+                                    id="program"
+                                    value={formData.program}
+                                    label="Program"
+                                    name="program"
+                                    onChange={handleChange}
+                                    MenuProps={{
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 300, // Adjust as needed
+                                            },
+                                        },
+                                        anchorOrigin: {
+                                            vertical: "bottom",
+                                            horizontal: "left"
+                                        },
+                                        transformOrigin: {
+                                            vertical: "top",
+                                            horizontal: "left"
+                                        },
+                                        getContentAnchorEl: null,
+                                    }}
+                                    required
+                                >
+                                    {programMenuEl}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </Box> */}
 
                     <label htmlFor="phoneNum" className="form-label">Enter your Phone Number:</label>
                     <input
@@ -411,7 +512,9 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                {profCourseMenuEl}
+                                {profCourseList.map((item, index) => (
+                                    <MenuItem key={index} value={item}>{item}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </Box>
@@ -429,7 +532,9 @@ const Form = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                {langCourseMenuEl}
+                                {langCourseList.map((item, index) => (
+                                    <MenuItem key={index} value={item}>{item}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                     </Box>

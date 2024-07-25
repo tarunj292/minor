@@ -1,5 +1,7 @@
 const MinorSchema = require("../models/MinorSchema");
 const ProgramSchema = require("../models/ProgramSchema")
+const ProfessionalCourse = require("../models/ProfessionalCourse")
+const LanguagesSchema = require("../models/LanguagesSchema");
 
 exports.createStudent = async (req, res) => {
   try {
@@ -116,6 +118,37 @@ exports.getAllStudentsByMinor = async (req, res) => {
     res.send({
       success: true,
       data: minor.students,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
+  }
+};
+
+
+exports.getAllLanguages = async (req, res) => {
+  try {
+    const Language = await LanguagesSchema.find()
+    res.send({
+      success: true,
+      data: Language,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
+  }
+};
+
+exports.getAllProfessionalCourses = async (req, res) => {
+  try {
+    const profCourse = await ProfessionalCourse.find()
+    res.send({
+      success: true,
+      data: profCourse,
     });
   } catch (err) {
     res.send({
