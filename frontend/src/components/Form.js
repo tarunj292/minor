@@ -138,6 +138,15 @@ const Form = () => {
         event.preventDefault();
     }
 
+    const fetchCapacity = async (minor) => {
+        try {
+            const res = await getOneMinor(minor)
+            return res.remainingCapacity
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     const fetchMinorDetails = async (minor) => {
         try {
             const res = await getOneMinor(minor)
@@ -209,13 +218,26 @@ const Form = () => {
 
     const fetchData = async (progName) => {
         try {
+            // Fetch the minors
             const res = await getAllMinorByProgram(progName);
-            const transformedData = res.minor.map(item => (
-                {
-                    value: item,
-                    label: item,
-                    disabled: false
-                }));
+
+            // Fetch capacities for each minor
+            const dataMinor = await Promise.all(res.minor.map(async minorName => {
+                const minorCap = await fetchCapacity(minorName);
+                return { minorName, minorCap };
+            }));
+
+            console.log(dataMinor);
+
+            // Transform the data for the menu
+            const transformedData = dataMinor.map(item => ({
+                value: item.minorName,
+                label: item.minorName,
+                disabled: item.minorCap == 0 ? true : false
+            }));
+
+            console.log(transformedData)
+
             setMinorCourseMenuEl(transformedData);
         } catch (error) {
             console.error(error);
@@ -259,7 +281,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.name ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.name ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.name ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter Name"
@@ -277,7 +299,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.email ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.email ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.email ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Somaiya Email"
@@ -296,7 +318,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.memberID ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.memberID ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.memberID ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter ID No:"
@@ -314,7 +336,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.seatNum ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.seatNum ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.seatNum ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter Seat Number (11 digit)"
@@ -350,7 +372,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.phoneNum ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.phoneNum ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.phoneNum ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter your Phone Number"
@@ -374,7 +396,13 @@ const Form = () => {
                                 required
                             >
                                 {minorCourseMenuEl.map((option, index) => (
-                                    <MenuItem sx={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap', wordBreak: 'normal' }} key={index} value={option.value} disabled={option.disabled} >{option.value}</MenuItem>
+                                    <MenuItem
+                                        sx={{
+                                            wordWrap: 'break-word',
+                                            whiteSpace: 'pre-wrap',
+                                            wordBreak: 'normal'
+                                        }} key={index} value={option.value} disabled={option.disabled} >{option.value}
+                                    </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
