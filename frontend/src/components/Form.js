@@ -51,7 +51,7 @@ const Form = () => {
     ]
 
     let profCourseMenuEl = profCourseList.map(item => (
-        <MenuItem sx={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap', wordBreak: 'normal' }} key={item} value={item}>{item}</MenuItem>
+        <MenuItem sx={{ whiteSpace: 'normal' }} key={item} value={item}>{item}</MenuItem>
     ))
 
     const langCourseList = [
@@ -66,7 +66,7 @@ const Form = () => {
     ]
 
     let langCourseMenuEl = langCourseList.map(item => (
-        <MenuItem sx={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap', wordBreak: 'normal' }} key={item} value={item}>{item}</MenuItem>
+        <MenuItem sx={{ whiteSpace: 'normal' }} key={item} value={item}>{item}</MenuItem>
     ))
 
     const SimpleAlert = (alertMsg, paraSeverity) => {
@@ -126,6 +126,7 @@ const Form = () => {
             createStudent(JSON.stringify(data)).then(res => {
                 if (res.success) {
                     updateChange();
+                    setCap(prevCap => prevCap - 1)
                     SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success");
                 } else {
                     SimpleAlert(res.message, "error");
@@ -168,7 +169,7 @@ const Form = () => {
                 item.progName
             );
             let p = programList.map(item => (
-                <MenuItem sx={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap', wordBreak: 'normal' }} key={item} value={item}>{item}</MenuItem>
+                <MenuItem sx={{ whiteSpace: 'normal' }} key={item} value={item}>{item}</MenuItem>
             ))
             setProgramMenuEl(p)
         } catch (error) {
@@ -221,24 +222,13 @@ const Form = () => {
             // Fetch the minors
             const res = await getAllMinorByProgram(progName);
 
-            // Fetch capacities for each minor
+            // Fetch capacities and transform data for the menu
             const dataMinor = await Promise.all(res.minor.map(async minorName => {
                 const minorCap = await fetchCapacity(minorName);
                 return { minorName, minorCap };
             }));
 
-            console.log(dataMinor);
-
-            // Transform the data for the menu
-            const transformedData = dataMinor.map(item => ({
-                value: item.minorName,
-                label: item.minorName,
-                disabled: item.minorCap == 0 ? true : false
-            }));
-
-            console.log(transformedData)
-
-            setMinorCourseMenuEl(transformedData);
+            setMinorCourseMenuEl(dataMinor);
         } catch (error) {
             console.error(error);
         }
@@ -398,10 +388,8 @@ const Form = () => {
                                 {minorCourseMenuEl.map((option, index) => (
                                     <MenuItem
                                         sx={{
-                                            wordWrap: 'break-word',
-                                            whiteSpace: 'pre-wrap',
-                                            wordBreak: 'normal'
-                                        }} key={index} value={option.value} disabled={option.disabled} >{option.value}
+                                            whiteSpace: 'normal'
+                                        }} key={index} value={option.minorName} disabled={option.minorCap == 0} >{option.minorName}
                                     </MenuItem>
                                 ))}
                             </Select>
