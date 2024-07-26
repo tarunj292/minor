@@ -16,9 +16,12 @@ const Display = () => {
     const [tableEl, setTableEl] = useState('')
     const [minorDetails, setMinorDetails] = useState([])
     const [searchQuery, setSearchQuery] = useState('')
+    const [choice, setChoice] = useState([])
     console.log("render")
     useEffect(() => { fetchMinorCourses() }, [])
     useEffect(() => { updateStudTable() }, [stud])
+
+    var categories = ["Minor","Professional Courses", "Languages"]
 
     const updateStudTable = () => {
         const tableRows = stud.map((item, index) => (
@@ -62,7 +65,11 @@ const Display = () => {
     const handleChange = (event) => {
         setMinorCourse(event.target.value)
         fetchOneMinor(event.target.value)
+    }
 
+    const handleChoice = (event) => {
+        setChoice(event.target.value)
+        console.log('yup ',event.target.value)
     }
 
     const filteredData = stud?.filter((item) =>
@@ -72,6 +79,26 @@ const Display = () => {
     return (
         <div className="d-flex flex-wrap justify-content-center">
             <div className="col-md-6 col-10">
+                <label htmlFor="minorCourse" className="form-label">Filter Using</label>
+                <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Categories</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="minorCourse"
+                            value={minorCourse}
+                            label="minorCourse"
+                            name="minorCourse"
+                            onChange={(event) => handleChoice(event)}
+                        >
+                            {categories.map((item, index) => (
+                                <MenuItem key={index} value={item}>{item}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Box>
+
+
                 <label htmlFor="minorCourse" className="form-label">Select Minor Course:</label>
                 <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                     <FormControl fullWidth>

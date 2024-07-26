@@ -208,18 +208,16 @@ const Form = () => {
     const fetchProgramData = async () => {
         try {
             const res = await getAllPrograms();
-            const programList = res.data.map(item =>
-                item.progName
-            );
-            let p = programList.map(item => (
-                <MenuItem sx={{ whiteSpace: 'normal' }} key={item} value={item}>{item}</MenuItem>
-            ))
-            setProgramMenuEl(p)
+            const programList = res.data.map(item => ({
+                value: item.progName,
+                label: item.progName  // Assuming progName is both value and label
+            }));
+            setProgramMenuEl(programList);
         } catch (error) {
             console.error(error);
         }
     };
-    
+
     
 
     const validateDetails = () => {

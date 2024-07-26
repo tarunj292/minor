@@ -157,3 +157,42 @@ exports.getAllProfessionalCourses = async (req, res) => {
     });
   }
 };
+
+exports.getAllStudentsByCategories = async (req, res) => {
+  try {
+    const { professionalcourse, language } = req.query;
+
+    if (!professionalcourse && !language) {
+      return res.status(400).json({ message: "Please provide a professional course or language to filter by." });
+    }
+
+    const filter = {};
+
+    if (professionalcourse) {
+      filter['students.professionalcourse'] = professionalcourse;
+    }
+
+    if (language) {
+      filter['students.language'] = language;
+    }
+
+    const minors = await MinorSchema.find(filter);
+
+    const students = minors.reduce((acc, minor) => {
+      const filteredStudents = minor.students.filter(student => {
+        if (professionalcourse && language) {
+          return student.professionalcourse === professionalcourse && student.language === language;
+        } else if (professionalcourse) {
+          return student.professionalcourse === professionalcourse;
+        } else if (language) {
+          return student.language === language;
+        }
+      });
+      return [...acc, ...filteredStudents];
+    }, []);
+
+    return res.status(200).json(students);
+  } catch (error) {
+    return res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
