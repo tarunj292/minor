@@ -241,6 +241,7 @@ const Display = () => {
     const [choicedata, setChoiceData] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCourse, setselectedCourse] = useState('');
+    const [filteredData, setFilteredData] = useState([])
 
     useEffect(() => {
         setCategories(["Minor", "Professional Courses", "Languages"]);
@@ -248,11 +249,18 @@ const Display = () => {
     }, []);
 
     useEffect(() => {
+        console.log('filter')
+        setFilteredData(stud?.filter((item) =>
+            item?.seatno?.includes(searchQuery)
+        ));
+    }, [searchQuery,stud])
+
+    useEffect(() => {
         updateStudTable();
-    }, [stud]);
+    }, [filteredData]);
 
     const updateStudTable = () => {
-        const tableRows = stud.map((item, index) => (
+        const tableRows = filteredData.map((item, index) => (
             <tr key={index} className="table-row">
                 <th scope="row">{index + 1}</th>
                 <td>{item.name}</td>
@@ -361,9 +369,7 @@ const Display = () => {
         XLSX.writeFile(wb, `${choice}-${selectedCourse}.xlsx`);
     };
 
-    const filteredData = stud?.filter((item) =>
-        item?.seatno?.includes(searchQuery)
-    );
+
 
     return (
         <div className="d-flex flex-wrap justify-content-center">
@@ -429,7 +435,7 @@ const Display = () => {
                 ) : (
                     <div>
                         <div className='col-md mt-2 mb-2 '>
-                            <Button variant="contained" sx={{width: "100%"}} color="primary" onClick={downloadExcel}>
+                            <Button variant="contained" sx={{ width: "100%" }} color="primary" onClick={downloadExcel}>
                                 Download Excel
                             </Button>
                         </div>

@@ -44,8 +44,24 @@ exports.createStudent = async (req, res) => {
     minor.remainingCapacity--;
     await minor.save();
     res.status(201).send({ success: true, message: "Student registered under minor subject" });
+
   } catch (error) {
     res.status(400).send({ success: true, message: error.message });
+  }
+};
+
+exports.getAllMinors = async (req, res) => {
+  try {
+    const minor = await MinorSchema.find()
+    res.send({
+      success: true,
+      data: minor,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
   }
 };
 
