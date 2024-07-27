@@ -14,6 +14,6 @@ router.get("/getAllMinorByProgram/:progName", getAllMinorByProgram);
 router.get("/getStudent/:minorName", getAllStudentsByMinor);
 router.get("/getAllLanguages",getAllLanguages);
 router.get("/getAllProfessionalCourses",getAllProfessionalCourses);
-router.get("/students",getAllStudentsByCategories)
+router.get("/getAllStudentsByCategories",getAllStudentsByCategories)
 
 module.exports = router;

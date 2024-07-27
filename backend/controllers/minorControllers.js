@@ -7,11 +7,24 @@ exports.createStudent = async (req, res) => {
   try {
     const { name, email, seatno, mobileno, memberid, programName, professionalcourse, language, minorSubject } = req.body;
 
-    const Minor = await MinorSchema.findOne({
-      "students.email": email
-    });
+    const existingEmailStudent = await MinorSchema.findOne({ "students.email": email });
+    if (existingEmailStudent) {
+      return res.status(400).send({ success: false, message: "This email is already used by another student." });
+    }
 
-    if (Minor) {
+    // Check if the student with the same memberid already exists
+    const existingMemberIdStudent = await MinorSchema.findOne({ "students.memberid": memberid });
+    if (existingMemberIdStudent) {
+      return res.status(400).send({ success: false, message: "This member ID is already used by another student." });
+    }
+
+    // Check if the student with the same seatno already exists
+    const existingSeatNoStudent = await MinorSchema.findOne({ "students.seatno": seatno });
+    if (existingSeatNoStudent) {
+      return res.status(400).send({ success: false, message: "This seat number is already used by another student." });
+    }
+
+    if (existingStudent) {
       res.status(400).send({ success: false, message: "This student Already filled The Form" });
     } else {
 

@@ -105,3 +105,24 @@ export const getAllProfessionalCourses = () => {
       throw err; // Rethrow the error to propagate it
     });
 };
+
+
+export const getAllStudentsByCategories = (category, selectedCourse) => {
+  return fetch(`${ENDPOINT_URL}/getAllStudentsByCategories?${category}=${selectedCourse}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      console.error("Error getting Data ", err);
+      throw err;
+    });
+};

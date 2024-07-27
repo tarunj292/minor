@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { getAllMinors, getOneMinor } from '../actions/studentAction';
+import React, { useState, useEffect } from 'react';
+import { getAllMinors, getOneMinor, getAllProfessionalCourses, getAllLanguages, getAllStudentsByCategories } from '../actions/studentAction';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField'
-
-//seat, program, name, email
+import TextField from '@mui/material/TextField';
 
 const Display = () => {
-    const [minorCourseArr, setMinorCourseArr] = useState([])
-    const [minorCourse, setMinorCourse] = useState('')
-    const [stud, setStud] = useState([])
-    const [tableEl, setTableEl] = useState('')
-    const [minorDetails, setMinorDetails] = useState([])
-    const [searchQuery, setSearchQuery] = useState('')
-    const [choice, setChoice] = useState([])
-    console.log("render")
-    useEffect(() => { fetchMinorCourses() }, [])
-    useEffect(() => { updateStudTable() }, [stud])
+    const [minorCourseArr, setMinorCourseArr] = useState([]);
+    const [minorCourse, setMinorCourse] = useState('');
+    const [stud, setStud] = useState([]);
+    const [tableEl, setTableEl] = useState('');
+    const [minorDetails, setMinorDetails] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [choice, setChoice] = useState('');
+    const [choicedata, setChoiceData] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCourse, setselectedCourse] = useState('')
 
-    var categories = ["Minor","Professional Courses", "Languages"]
+    useEffect(() => {
+        setCategories(["Minor", "Professional Courses", "Languages"]);
+        console.log(stud)
+    }, []);
+
+    useEffect(() => {
+        updateStudTable();
+    }, [stud]);
 
     const updateStudTable = () => {
         const tableRows = stud.map((item, index) => (
@@ -38,39 +43,87 @@ const Display = () => {
             </tr>
         ));
         setTableEl(tableRows);
-    }
+    };
 
     const fetchOneMinor = async (courseName) => {
         try {
-            const res = await getOneMinor(courseName)
-            const studArr = res.students.map(item => item)
-            setMinorDetails([res.capacity, res.remainingCapacity])
-            setStud(studArr)
+            const res = await getOneMinor(courseName);
+            const studArr = res.students.map(item => item);
+            setMinorDetails([res.capacity, res.remainingCapacity]);
+            setStud(studArr);
         } catch (error) {
-            console.log(error)
+            console.error(error);
         }
-    }
+    };
 
     const fetchMinorCourses = async () => {
         try {
-            const res = await getAllMinors()
-            let arr = res.data.map(item => item.courseName)
-            setMinorCourseArr(arr)
+            const res = await getAllMinors();
+            let arr = res.data.map(item => item.courseName);
+            setChoiceData(arr);
+        } catch (error) {
+            console.error(error);
         }
-        catch (error) {
-            console.log(error)
+    };
+
+    const fetchProfessionalCourses = async () => {
+        try {
+            const res = await getAllProfessionalCourses();
+            let arr = res.data.map(item => item.profCourse);
+            setChoiceData(arr);
+        } catch (error) {
+            console.error(error);
         }
-    }
+    };
 
-    const handleChange = (event) => {
-        setMinorCourse(event.target.value)
-        fetchOneMinor(event.target.value)
-    }
+    const fetchLanguages = async () => {
+        try {
+            const res = await getAllLanguages();
+            let arr = res.data.map(item => item.langCourseList);
+            setChoiceData(arr);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-    const handleChoice = (event) => {
-        setChoice(event.target.value)
-        console.log('yup ',event.target.value)
-    }
+    const fetchStudentsByCategory = async (category, selectedCourse) => {
+        try {
+            const res = await getAllStudentsByCategories(category, selectedCourse);
+            console.log('data',res)
+            const studArr = res.map(item => item);
+            setStud(studArr);
+           // setMinorDetails([res.capacity, res.remainingCapacity]);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleChange = async (event) => {
+        setselectedCourse(event.target.value);
+        let selectedCourse = event.target.value;
+
+        if (choice === "Minor") {
+            setMinorCourse(selectedCourse);
+            fetchOneMinor(selectedCourse);
+        } else if (choice === "Professional Courses") {
+            fetchStudentsByCategory('professionalcourse', selectedCourse);
+        } else if (choice === "Languages") {
+            fetchStudentsByCategory('language', selectedCourse);
+        }
+    };
+
+    const handleChoice = async (event) => {
+        const selectedChoice = event.target.value;
+        setChoice(selectedChoice);
+
+        if (selectedChoice === "Minor") {
+            fetchMinorCourses();
+        } else if (selectedChoice === "Professional Courses") {
+            fetchProfessionalCourses();
+        } else if (selectedChoice === "Languages") {
+            fetchLanguages();
+        }
+    };
 
     const filteredData = stud?.filter((item) =>
         item?.seatno?.includes(searchQuery)
@@ -85,11 +138,11 @@ const Display = () => {
                         <InputLabel id="demo-simple-select-label">Categories</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
-                            id="minorCourse"
-                            value={minorCourse}
-                            label="minorCourse"
-                            name="minorCourse"
-                            onChange={(event) => handleChoice(event)}
+                            id="categories"
+                            value={choice}
+                            label="Categories"
+                            name="categories"
+                            onChange={handleChoice}
                         >
                             {categories.map((item, index) => (
                                 <MenuItem key={index} value={item}>{item}</MenuItem>
@@ -98,20 +151,18 @@ const Display = () => {
                     </FormControl>
                 </Box>
 
-
-                <label htmlFor="minorCourse" className="form-label">Select Minor Course:</label>
                 <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Minor</InputLabel>
+                        <InputLabel id="demo-simple-select-label">Select</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
-                            id="minorCourse"
-                            value={minorCourse}
-                            label="minorCourse"
-                            name="minorCourse"
-                            onChange={(event) => handleChange(event)}
+                            id="choice"
+                            value={selectedCourse}
+                            label="Select"
+                            name="choice"
+                            onChange={handleChange}
                         >
-                            {minorCourseArr.map((item, index) => (
+                            {choicedata.map((item, index) => (
                                 <MenuItem key={index} value={item}>{item}</MenuItem>
                             ))}
                         </Select>
@@ -129,12 +180,17 @@ const Display = () => {
                     />
                 </div>
 
-                {minorDetails.length == 2 && <div style={{ marginTop: "30px", marginBottom: "30px", fontWeight: "bold" }}>Total Seats: {minorDetails[0]} <br /> Available Seats: {minorDetails[1]} <br /> Students Enrolled: {minorDetails[0] - minorDetails[1]}<br /></div>}
-                {stud.length === 0 ?
-                    <div >
-                        No Students Enrolled
+                {minorDetails.length === 2 && (
+                    <div style={{ marginTop: "30px", marginBottom: "30px", fontWeight: "bold" }}>
+                        Total Seats: {minorDetails[0]} <br />
+                        Available Seats: {minorDetails[1]} <br />
+                        Students Enrolled: {minorDetails[0] - minorDetails[1]}<br />
                     </div>
-                    :
+                )}
+
+                {stud.length === 0 ? (
+                    <div>No Students Enrolled</div>
+                ) : (
                     <table className="table red">
                         <thead>
                             <tr className="red">
@@ -149,14 +205,12 @@ const Display = () => {
                                 <th scope="col">Prof. Course</th>
                             </tr>
                         </thead>
-                        <tbody >
-                            {tableEl}
-                        </tbody>
+                        <tbody>{tableEl}</tbody>
                     </table>
-                }
+                )}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Display;

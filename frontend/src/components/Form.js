@@ -132,6 +132,18 @@ const Form = () => {
                 if (res.success) {
                     updateChange();
                     setCap(prevCap => prevCap - 1)
+                    setFormData({
+                        name: '',
+                        email: '',
+                        memberID: '',
+                        seatNum: '',
+                        program: '',
+                        phoneNum: '',
+                        profCourse: '',
+                        langCourse: '',
+                        minorCourse: ''
+                    });
+                    setCap(null)
                     SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success");
                 } else {
                     SimpleAlert(res.message, "error");
@@ -218,7 +230,7 @@ const Form = () => {
         }
     };
 
-    
+
 
     const validateDetails = () => {
         let errors = {

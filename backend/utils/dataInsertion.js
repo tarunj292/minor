@@ -101,7 +101,6 @@ const insertMany = async () => {
   } catch (err) {
     console.log(err);
   }
-  process.exit();
 };
 insertMany();
 
@@ -113,7 +112,6 @@ const progrmdt = async () => {
   } catch (err) {
     console.log(err);
   }
-  process.exit();
 };
 progrmdt();
 
@@ -134,5 +132,6 @@ const insertProfessionalCourses = async () => {
   } catch (err) {
     console.error("Error importing Professional Courses Data:", err);
   }
+  process.exit();
 };
 insertProfessionalCourses();
