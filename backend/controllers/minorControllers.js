@@ -24,33 +24,44 @@ exports.createStudent = async (req, res) => {
       return res.status(400).send({ success: false, message: "This seat number is already used by another student." });
     }
 
-    if (existingStudent) {
-      res.status(400).send({ success: false, message: "This student Already filled The Form" });
-    } else {
+    const minor = await MinorSchema.findOne({ courseName: minorSubject });
 
-      const minor = await MinorSchema.findOne({ courseName: minorSubject });
-
-      if (!minor) {
-        return res.status(404).send({ success: false, message: "Minor subject not found" });
-      }
-
-      const student = {
-        name,
-        email,
-        seatno,
-        mobileno,
-        memberid,
-        programName,
-        professionalcourse,
-        language,
-      };
-      minor.students.push(student);
-      minor.remainingCapacity--;
-      await minor.save();
-      res.status(201).send({ success: true, message: "Student registered under minor subject" });
+    if (!minor) {
+      return res.status(404).send({ success: false, message: "Minor subject not found" });
     }
+
+    const student = {
+      name,
+      email,
+      seatno,
+      mobileno,
+      memberid,
+      programName,
+      professionalcourse,
+      language,
+    };
+    minor.students.push(student);
+    minor.remainingCapacity--;
+    await minor.save();
+    res.status(201).send({ success: true, message: "Student registered under minor subject" });
+
   } catch (error) {
     res.status(400).send({ success: true, message: error.message });
+  }
+};
+
+exports.getAllMinors = async (req, res) => {
+  try {
+    const minor = await MinorSchema.find()
+    res.send({
+      success: true,
+      data: minor,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      error: err,
+    });
   }
 };
 
