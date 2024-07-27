@@ -33,7 +33,6 @@ const Form = () => {
     const [cap, setCap] = useState();
     const [minorCourseMenuEl, setMinorCourseMenuEl] = useState([]);
     const [programMenuEl, setProgramMenuEl] = useState([]);
-    //testing
     const [langCourseList, setlang] = useState([])
     const [profCourseList, setProfCourse] = useState([])
 
@@ -46,33 +45,6 @@ const Form = () => {
     useEffect(() => { fetchData(formData.program) }, [formData.program])
     useEffect(() => { setErrors(validateDetails()) }, [formData])
     useEffect(() => { fetchProgramData() }, [])
-
-    // const profCourseList = [
-    //     "Professional Communication",
-    //     "Hindi Language",
-    //     "Marathi Language",
-    //     "Sanskrit Language",
-    //     "Gujarati Language"
-    // ]
-
-    // let profCourseMenuEl = profCourseList.map(item => (
-    //     <MenuItem key={item} value={item}>{item}</MenuItem>
-    // ))
-
-    // const langCourseList = [
-    //     "Chinese",
-    //     "French",
-    //     "german",
-    //     "spanish",
-    //     "urdu",
-    //     "Italian",
-    //     "japanese",
-    //     "Not interested"
-    // ]
-
-    // let langCourseMenuEl = langCourseList.map(item => (
-    //     <MenuItem key={item} value={item}>{item}</MenuItem>
-    // ))
 
     const SimpleAlert = (alertMsg, paraSeverity) => {
         setAlertMessage(alertMsg)
@@ -184,7 +156,6 @@ const Form = () => {
             const res = await getAllLanguages();
             const languageList = res.data.map(item => item.langCourseList);
             setlang(languageList);
-            console.log('languages', languageList);
         } catch (err) {
             console.error('error getting languages', err);
         }
@@ -195,28 +166,11 @@ const Form = () => {
             const res = await getAllProfessionalCourses();
             const profCourseData = res.data.map(item => item.profCourse);
             setProfCourse(profCourseData);
-            console.log('prof courses ', profCourseData);
         } catch (err) {
             console.error('error getting programs', err);
         }
     }
 
-
-
-    // const fetchProgramData = async () => {
-    //     try {
-    //         const res = await getAllPrograms();
-    //         const programList = res.data.map(item =>
-    //             item.progName
-    //         );
-    //         let p = programList.map(item => (
-    //             <MenuItem key={item} value={item}>{item}</MenuItem>
-    //         ))
-    //         setProgramMenuEl(p)
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
     const fetchProgramData = async () => {
         try {
             const res = await getAllPrograms();
@@ -229,8 +183,6 @@ const Form = () => {
             console.error(error);
         }
     };
-
-
 
     const validateDetails = () => {
         let errors = {
@@ -291,15 +243,6 @@ const Form = () => {
 
     return (
         <>
-            {/* <div class="MuiPaper-root MuiPaper-elevation MuiPa  per-rounded MuiPaper-elevation8 MuiPopover-paper MuiMenu-paper MuiMenu-paper css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper" tabindex="-1" style={{ opacity: 1, transform: 'none', minWidth: '261px', transition: 'opacity 360ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 240ms cubic-bezier(0.4, 0, 0.2, 1) 0ms', top: '80px', left: '16px', transformOrigin: '211.6px 79.375px' }}>
-                <ul class="MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list" role="listbox" tabindex="-1" aria-labelledby="demo-simple-select-label" id=":r13:" style={{ paddingRight: '0px', width: 'calc(100% + 0px)' }}>
-                    <li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" tabindex="0" role="option" aria-selected="false" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap', wordBreak: 'normal' }} data-value="Bachelor of Commerce (Accounting & Finance)">
-                        Bachelor of Commerce (Accounting & Finance)
-                        <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
-                    </li>
-                </ul>
-            </div> */}
-
             <h1 style={{
                 display: "flex",
                 justifyContent: "center",
@@ -418,7 +361,6 @@ const Form = () => {
                                     getContentAnchorEl: null,
                                 }}
                             >
-                                {/* {programMenuEl} */}
                                 {programMenuEl.map((item, index) => (
                                     <MenuItem key={item.value} value={item.value} style={{ whiteSpace: 'normal' }}>
                                         {item.label}
@@ -428,42 +370,6 @@ const Form = () => {
                         </FormControl>
                     </Box>
 
-                    {/* <Box>
-                        <label htmlFor="program" className="form-label">Select your Program:</label>
-                        <Box sx={{ minWidth: 120, marginBottom: "5vh" }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Program</InputLabel>
-                                <Select  
-                                    autoWidth='true'
-                                    labelId="demo-simple-select-label"
-                                    id="program"
-                                    value={formData.program}
-                                    label="Program"
-                                    name="program"
-                                    onChange={handleChange}
-                                    MenuProps={{
-                                        PaperProps: {
-                                            style: {
-                                                maxHeight: 300, // Adjust as needed
-                                            },
-                                        },
-                                        anchorOrigin: {
-                                            vertical: "bottom",
-                                            horizontal: "left"
-                                        },
-                                        transformOrigin: {
-                                            vertical: "top",
-                                            horizontal: "left"
-                                        },
-                                        getContentAnchorEl: null,
-                                    }}
-                                    required
-                                >
-                                    {programMenuEl}
-                                </Select>
-                            </FormControl>
-                        </Box>
-                    </Box> */}
 
                     <label htmlFor="phoneNum" className="form-label">Enter your Phone Number:</label>
                     <input
