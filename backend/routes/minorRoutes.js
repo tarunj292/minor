@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { createStudent, getAllMinors, getOneMinor, getOneMinorByID, getAllStudentsByMinor, getAllMinorByProgram, getAllPrograms, getAllLanguages,
-    getAllProfessionalCourses
+    getAllProfessionalCourses, getAllStudentsByCategories
  } = require("../controllers/minorControllers");
 
 router.get("/getAllPrograms", getAllPrograms)
@@ -14,5 +14,6 @@ router.get("/getAllMinorByProgram/:progName", getAllMinorByProgram);
 router.get("/getStudent/:minorName", getAllStudentsByMinor);
 router.get("/getAllLanguages",getAllLanguages);
 router.get("/getAllProfessionalCourses",getAllProfessionalCourses);
+router.get("/getAllStudentsByCategories",getAllStudentsByCategories)
 
 module.exports = router;

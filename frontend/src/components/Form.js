@@ -131,6 +131,19 @@ const Form = () => {
             createStudent(JSON.stringify(data)).then(res => {
                 if (res.success) {
                     updateChange();
+                    setCap(prevCap => prevCap - 1)
+                    setFormData({
+                        name: '',
+                        email: '',
+                        memberID: '',
+                        seatNum: '',
+                        program: '',
+                        phoneNum: '',
+                        profCourse: '',
+                        langCourse: '',
+                        minorCourse: ''
+                    });
+                    setCap(null)
                     SimpleAlert(`Successfully Enrolled in ${formData.minorCourse} course.`, "success");
                 } else {
                     SimpleAlert(res.message, "error");
@@ -141,6 +154,15 @@ const Form = () => {
             SimpleAlert(("Type" + msg.slice(15, msg.length)), "error");
         }
         event.preventDefault();
+    }
+
+    const fetchCapacity = async (minor) => {
+        try {
+            const res = await getOneMinor(minor)
+            return res.remainingCapacity
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     const fetchMinorDetails = async (minor) => {
@@ -207,8 +229,8 @@ const Form = () => {
             console.error(error);
         }
     };
-    
-    
+
+
 
     const validateDetails = () => {
         let errors = {
@@ -252,14 +274,16 @@ const Form = () => {
 
     const fetchData = async (progName) => {
         try {
+            // Fetch the minors
             const res = await getAllMinorByProgram(progName);
-            const transformedData = res.minor.map(item => (
-                {
-                    value: item,
-                    label: item,
-                    disabled: false
-                }));
-            setMinorCourseMenuEl(transformedData);
+
+            // Fetch capacities and transform data for the menu
+            const dataMinor = await Promise.all(res.minor.map(async minorName => {
+                const minorCap = await fetchCapacity(minorName);
+                return { minorName, minorCap };
+            }));
+
+            setMinorCourseMenuEl(dataMinor);
         } catch (error) {
             console.error(error);
         }
@@ -267,6 +291,15 @@ const Form = () => {
 
     return (
         <>
+            {/* <div class="MuiPaper-root MuiPaper-elevation MuiPa  per-rounded MuiPaper-elevation8 MuiPopover-paper MuiMenu-paper MuiMenu-paper css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper" tabindex="-1" style={{ opacity: 1, transform: 'none', minWidth: '261px', transition: 'opacity 360ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 240ms cubic-bezier(0.4, 0, 0.2, 1) 0ms', top: '80px', left: '16px', transformOrigin: '211.6px 79.375px' }}>
+                <ul class="MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list" role="listbox" tabindex="-1" aria-labelledby="demo-simple-select-label" id=":r13:" style={{ paddingRight: '0px', width: 'calc(100% + 0px)' }}>
+                    <li class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root" tabindex="0" role="option" aria-selected="false" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap', wordBreak: 'normal' }} data-value="Bachelor of Commerce (Accounting & Finance)">
+                        Bachelor of Commerce (Accounting & Finance)
+                        <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
+                    </li>
+                </ul>
+            </div> */}
+
             <h1 style={{
                 display: "flex",
                 justifyContent: "center",
@@ -293,7 +326,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.name ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.name ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.name ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter Name"
@@ -311,7 +344,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.email ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.email ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.email ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Somaiya Email"
@@ -330,7 +363,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.memberID ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.memberID ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.memberID ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter ID No:"
@@ -348,7 +381,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.seatNum ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.seatNum ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.seatNum ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter Seat Number (11 digit)"
@@ -442,7 +475,7 @@ const Form = () => {
                         onChange={handleChange}
                         style={{
                             marginBottom: "3vh",
-                            border: errors.phoneNum ? '3px solid red' : '1px solid #ced4da', // Apply red color if there's an error
+                            border: errors.phoneNum ? '3px solid red' : '1px solid #ced4da',
                             boxShadow: errors.phoneNum ? '0 0 0 0.2rem rgba(255, 0, 0, 0.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)'
                         }}
                         placeholder="Enter your Phone Number"
@@ -466,7 +499,11 @@ const Form = () => {
                                 required
                             >
                                 {minorCourseMenuEl.map((option, index) => (
-                                    <MenuItem key={index} value={option.value} disabled={option.disabled} >{option.value}</MenuItem>
+                                    <MenuItem
+                                        sx={{
+                                            whiteSpace: 'normal'
+                                        }} key={index} value={option.minorName} disabled={option.minorCap == 0} >{option.minorName}
+                                    </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
