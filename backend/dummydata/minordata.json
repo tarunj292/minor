@@ -1,7 +1,7 @@
 [
   {
     "courseName": "Minor in Accounting",
-    "capacity": 1
+    "capacity": 60
   },
   {
     "courseName": "Minor in Finance",
@@ -74,5 +74,9 @@
   {
     "courseName": "Minor in Indian Heritage",
     "capacity": 40
+  },
+  {
+    "courseName" : "Minor in Narrative Literature",
+    "capacity" : 40
   }
 ]
