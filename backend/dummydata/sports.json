@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Athletics",
+        "capacity": 180
+    },
+    {
+        "name": "Badminton",
+        "capacity": 72
+    },
+    {
+        "name": "Basketball",
+        "capacity": 120
+    },
+    {
+        "name": "Cricket",
+        "capacity": 120
+    },
+    {
+        "name": "Football",
+        "capacity": 120
+    },
+    {
+        "name": "Squash",
+        "capacity": 72
+    },
+    {
+        "name": "Taekwondo",
+        "capacity": 60
+    },
+    {
+        "name": "Volleyball",
+        "capacity": 120
+    },
+    {
+        "name": "Swimming",
+        "capacity": 90
+    },
+    {
+        "name": "Judo",
+        "capacity": 120
+    }
+]

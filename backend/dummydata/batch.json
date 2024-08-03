@@ -1,0 +1,122 @@
+[
+    {
+        "name": "Athletics1",
+        "capacity": 60
+    },
+    {
+        "name": "Badminton1",
+        "capacity": 24
+    },
+    {
+        "name": "Basketball1",
+        "capacity": 40
+    },
+    {
+        "name": "Cricket1",
+        "capacity": 40
+    },
+    {
+        "name": "Football1",
+        "capacity": 40
+    },
+    {
+        "name": "Squash1",
+        "capacity": 24
+    },
+    {
+        "name": "Taekwondo1",
+        "capacity": 20
+    },
+    {
+        "name": "Volleyball1",
+        "capacity": 40
+    },
+    {
+        "name": "Swimming1",
+        "capacity": 30
+    },
+    {
+        "name": "Judo1",
+        "capacity": 40
+    },
+    {
+        "name": "Athletics2",
+        "capacity": 60
+    },
+    {
+        "name": "Badminton2",
+        "capacity": 24
+    },
+    {
+        "name": "Basketball2",
+        "capacity": 40
+    },
+    {
+        "name": "Cricket2",
+        "capacity": 40
+    },
+    {
+        "name": "Football2",
+        "capacity": 40
+    },
+    {
+        "name": "Squash2",
+        "capacity": 24
+    },
+    {
+        "name": "Taekwondo2",
+        "capacity": 20
+    },
+    {
+        "name": "Volleyball2",
+        "capacity": 40
+    },
+    {
+        "name": "Swimming2",
+        "capacity": 30
+    },
+    {
+        "name": "Judo2",
+        "capacity": 40
+    },
+    {
+        "name": "Athletics3",
+        "capacity": 60
+    },
+    {
+        "name": "Badminton3",
+        "capacity": 34
+    },
+    {
+        "name": "Basketball3",
+        "capacity": 40
+    },
+    {
+        "name": "Cricket3",
+        "capacity": 40
+    },
+    {
+        "name": "Football3",
+        "capacity": 40
+    },
+    {
+        "name": "Squash3",
+        "capacity": 24
+    },
+    {
+        "name": "Taekwondo3",
+        "capacity": 20
+    },
+    {
+        "name": "Volleyball3",
+        "capacity": 40
+    },
+    {
+        "name": "Swimming3",
+        "capacity": 30
+    },
+    {
+        "name": "Judo3",
+        "capacity": 40
+    }
+]
