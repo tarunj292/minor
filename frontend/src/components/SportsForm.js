@@ -30,8 +30,15 @@ const Form = () => {
     const [severity, setSeverity] = useState('');
     const [cap, setCap] = useState();
     const [sportsList, setSportsList] = useState([])
-    const [programMenuEl, setProgramMenuEl] = useState([]);
+    const [programList, setProgramList] = useState([]);
 
+    useEffect(() => {
+        setCap(null)
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            sport: null
+        }));
+    }, [formData.program])
     useEffect(() => { fetchCapacity() }, [formData.sport])
     useEffect(() => { setErrors(validateDetails()) }, [formData])
     useEffect(() => {
@@ -98,7 +105,19 @@ const Form = () => {
             }
             )
         } else {
-            SimpleAlert(("Type" + msg.slice(15, msg.length)), "error");
+            console.log("msg", msg, error)
+            if (msg === undefined) {
+                if (formData.sport === null) {
+                    SimpleAlert(`Please select a sport from the drop down.`, "error");
+                }
+                else {
+                    SimpleAlert(`There are no seats currently available in ${formData.sport}, Try selecting another sport.`, "error");
+                }
+            }
+            else {
+                SimpleAlert(("Type" + msg.slice(15, msg.length)), "error");
+            }
+
         }
         event.preventDefault();
     }
@@ -125,11 +144,8 @@ const Form = () => {
     const fetchProgramData = async () => {
         try {
             const res = await getAllPrograms();
-            const programList = res.data.map(item => ({
-                value: item.progName,
-                label: item.progName  // Assuming progName is both value and label
-            }));
-            setProgramMenuEl(programList);
+            const programList = res.data.map(item => (item.progName))
+            setProgramList(programList);
         } catch (error) {
             console.error(error);
         }
@@ -178,7 +194,7 @@ const Form = () => {
     return (
         <>
             <h1 className='text-center fs-1 py-md-5 py-3'>
-            Sports Selection Form 
+                Sports Selection Form
             </h1>
             <div style={{
                 display: "flex",
@@ -288,9 +304,9 @@ const Form = () => {
                                     getContentAnchorEl: null,
                                 }}
                             >
-                                {programMenuEl.map((item, index) => (
-                                    <MenuItem key={index} value={item.value} style={{ whiteSpace: 'normal' }}>
-                                        {item.label}
+                                {programList.map((item, index) => (
+                                    <MenuItem key={index} value={item} style={{ whiteSpace: 'normal' }}>
+                                        {item}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -338,7 +354,7 @@ const Form = () => {
                         </FormControl>
                     </Box>
 
-                    {cap && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Available Seats: {cap}<br /></div>}
+                    {cap !== null && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Available Seats: {cap}<br /></div>}
 
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>

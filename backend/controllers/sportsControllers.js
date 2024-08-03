@@ -88,7 +88,11 @@ exports.createStudent2 = async (req, res) => {
         }
 
     } catch (error) {
-        res.status(400).send({ success: false, message: error.message });
+        if (error.code === 11000) {
+            res.status(400).send({ success: false, message: `This ${Object.keys(error.keyValue)} has already used to  fill the form.` })
+        } else {
+            res.status(400).send({ success: false, message: error.message })
+        }
     }
 };
 
@@ -105,8 +109,56 @@ exports.getCapacityBySport = async (req, res) => {
     try {
         const sportName = req.params.sportName
         const programName = req.params.programName
-        const batchNumber = 1
-        const queryString = sportName + batchNumber
+
+        let batchName;
+        switch (programName) {
+            case "Bachelor of Arts (Mass Communication & Journalism)":
+                batchName = sportName + 3
+                break;
+            case "Bachelor of Business Administration":
+                batchName = sportName + 2
+                break;
+            case "Bachelor of Business Management":
+                batchName = sportName + 2
+                break;
+            case "Bachelor of Commerce (Accounting & Finance)":
+                batchName = sportName + 3
+                break;
+            case "Bachelor of Commerce (Banking & Finance)":
+                batchName = sportName + 3
+                break;
+            case "Bachelor of Commerce (Financial Markets)":
+                batchName = sportName + 3
+                break;
+            case "Bachelor of Science (Psychology)":
+                batchName = sportName + 3
+                break;
+            case "Bachelor of Computer Applications":
+                batchName = sportName + 1
+                break;
+            case "Bachelor of Science (Computer Science)":
+                batchName = sportName + 1
+                break;
+            case "Bachelor of Science (Economics)":
+                batchName = sportName + 2
+                break;
+            case "Bachelor of Science (Information Technology)":
+                batchName = sportName + 1
+                break;
+            case "Bachelor of Science (Biotechnology)":
+                batchName = sportName + 3
+                break;
+            case "Bachelor of Science (Data Science)":
+                batchName = sportName + 1
+                break;
+            case "Integrated Bachelor of Science-Master of Science":
+                batchName = sportName + 3
+                break;
+            default:
+                batchName = "default bench Name";
+                break;
+        }
+        const queryString = batchName
         const batch = await Batch.findOne({ name: queryString });
         res.status(201).send({ remainingCapacity: batch.remainingCapacity });
 
