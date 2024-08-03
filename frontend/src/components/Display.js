@@ -253,7 +253,7 @@ const Display = () => {
         setFilteredData(stud?.filter((item) =>
             item?.seatno?.includes(searchQuery)
         ));
-    }, [searchQuery,stud])
+    }, [searchQuery, stud])
 
     useEffect(() => {
         updateStudTable();
@@ -439,7 +439,7 @@ const Display = () => {
                                 Download Excel
                             </Button>
                         </div>
-                        <div>
+                        <div className='d-flex justify-content-center align-items-center'>
                             <table id="studentTable" className="table red">
                                 <thead>
                                     <tr className="red">
