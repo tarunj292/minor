@@ -177,15 +177,8 @@ const Form = () => {
 
     return (
         <>
-            <h1 style={{
-                display: "flex",
-                justifyContent: "center",
-                fontSize: "2vh",
-                fontWeight: 600,
-                textAlign: "center",
-                marginTop: "3vh"
-            }}>
-                Welcome to Somaiya Minor Selection Form
+            <h1 className='text-center fs-1 py-md-5 py-3'>
+            Sports Selection Form 
             </h1>
             <div style={{
                 display: "flex",

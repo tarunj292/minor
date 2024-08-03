@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const Sport = require("../models/SportsSchema");
+const Sport = require('../models/Sports/SportsSchema');
+const Batch = require('../models/Sports/BatchSchema');
 const sportData = require("../dummydata/sports.json");
-const Batch = require("../models/BatchSchema");
 const batchData = require("../dummydata/batch.json");
 
 

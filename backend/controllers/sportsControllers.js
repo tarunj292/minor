@@ -1,6 +1,6 @@
-const Student = require('../models/StudentSchema');
-const Sport = require('../models/SportsSchema');
-const Batch = require('../models/BatchSchema');
+const Student = require('../models/Sports/StudentSchema');
+const Sport = require('../models/Sports/SportsSchema');
+const Batch = require('../models/Sports/BatchSchema');
 
 exports.createStudent2 = async (req, res) => {
     try {

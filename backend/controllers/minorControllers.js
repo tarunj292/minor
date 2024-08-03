@@ -1,7 +1,7 @@
-const MinorSchema = require("../models/MinorSchema");
-const ProgramSchema = require("../models/ProgramSchema")
-const ProfessionalCourse = require("../models/ProfessionalCourse")
-const LanguagesSchema = require("../models/LanguagesSchema");
+const MinorSchema = require("../models/Minor/MinorSchema");
+const ProgramSchema = require("../models/Minor/ProgramSchema")
+const ProfessionalCourse = require("../models/Minor/ProfessionalCourse")
+const LanguagesSchema = require("../models/Minor/LanguagesSchema");
 
 exports.createStudent = async (req, res) => {
   try {
