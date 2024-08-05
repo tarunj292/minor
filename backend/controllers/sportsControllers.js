@@ -6,6 +6,23 @@ exports.createStudent2 = async (req, res) => {
     try {
         const { name, email, seatno, mobileno, memberid, programName, sport } = req.body;
 
+        const existingEmailStudent = await Student.findOne({ "email": email });
+    if (existingEmailStudent) {
+      return res.status(400).send({ success: false, message: "This email is already used by another student." });
+    }
+
+    // Check if the student with the same memberid already exists
+    const existingMemberIdStudent = await Student.findOne({ "memberid": memberid });
+    if (existingMemberIdStudent) {
+      return res.status(400).send({ success: false, message: "This member ID is already used by another student." });
+    }
+
+    // Check if the student with the same seatno already exists
+    const existingSeatNoStudent = await Student.findOne({ "seatno": seatno });
+    if (existingSeatNoStudent) {
+      return res.status(400).send({ success: false, message: "This seat number is already used by another student." });
+    }
+
         const student = await Student.create({ name, email, seatno, mobileno, memberid, programName });
 
         if (!student) {
@@ -164,5 +181,44 @@ exports.getCapacityBySport = async (req, res) => {
 
     } catch (error) {
         res.status(400).send({ success: false, message: error.message });
+    }
+}
+
+
+// exports.getStudentsFromSport = async (req, res) => {
+//   const { sportName } = req.params;
+//   try {
+//     const sportObject = await Sport.findOne({ name: sportName }).sort(name).populate('batch');
+//     if (!sportObject) {
+//       return res.status(404).send({ message: 'Sport not found' });
+//     }
+
+//     const batches = await Batch.find({ _id: { $in: sportObject.batch } }).populate('students');
+
+//     const students = batches.flatMap(batch => batch.students);
+
+//     res.status(200).send(students);
+//   } catch (err) {
+//     res.status(400).send({ error: err.message });
+//   }
+// };
+
+exports.getStudentsFromSport = async (req, res) => {
+    const { sportName } = req.params;
+    try {
+        const sportObject = await Sport.findOne({ name: sportName }).populate('batch');
+        if (!sportObject) {
+            return res.status(404).send({ message: 'Sport not found' });
+        }
+        const batches = await Batch.find({ _id: { $in: sportObject.batch } }).populate('students');
+
+        const batchWithStudents = batches.map(batch => ({
+            batchName: batch.name,
+            students: batch.students
+        }));
+
+        res.status(200).send(batchWithStudents);
+    } catch (err) {
+        res.status(400).send({ error: err.message });
     }
 }

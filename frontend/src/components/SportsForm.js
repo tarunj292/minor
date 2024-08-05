@@ -6,7 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
-import { createStudent2, getAllPrograms, getAllSports, getCapacityBySport } from '../actions/studentAction';
+import { createStudent2, getAllSports, getCapacityBySport } from '../actions/sportsActions';
+import programData from '../constants/Data/programData.json'
 
 const Form = () => {
     const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ const Form = () => {
     useEffect(() => { fetchCapacity() }, [formData.sport])
     useEffect(() => { setErrors(validateDetails()) }, [formData])
     useEffect(() => {
-        fetchProgramData()
+        setProgramList(programData)
         fetchSports()
     }, [])
 
@@ -141,16 +142,6 @@ const Form = () => {
         }
     }
 
-    const fetchProgramData = async () => {
-        try {
-            const res = await getAllPrograms();
-            const programList = res.data.map(item => (item.progName))
-            setProgramList(programList);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     const validateDetails = () => {
         let errors = {
             name: '',
@@ -191,6 +182,11 @@ const Form = () => {
         return errors
     }
 
+    const isFormValid = () => {
+        return Object.values(formData).every(value => value ? value.trim() !== '' : false);
+    };
+    
+
     return (
         <>
             <h1 className='text-center fs-1 py-md-5 py-3'>
@@ -200,7 +196,7 @@ const Form = () => {
                 display: "flex",
                 justifyContent: "center"
             }}>
-                <form className="col-md-6 col-10" onSubmit={handleSubmit}>
+                <div className="col-md-6 col-10" >
 
                     <label htmlFor="name" className="form-label">Enter your Name:</label>
                     <input
@@ -356,8 +352,20 @@ const Form = () => {
 
                     {cap !== null && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Available Seats: {cap}<br /></div>}
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={!isFormValid()} // Disable button if form is not valid
+                        style={{
+                            textDecoration: !isFormValid() ? 'line-through' : 'none',
+                            opacity: !isFormValid() ? 0.5 : 1, // Optional: makes the button look disabled
+                            cursor: !isFormValid() ? 'not-allowed' : 'pointer' // Optional: shows a 'not allowed' cursor when hovering
+                        }}
+                        onClick={handleSubmit}
+                    >
+                        Submit
+                    </button>
+                </div>
                 <Dialog open={alertOpen} onClose={handleAlertClose}>
                     <Alert onClose={handleAlertClose} severity={severity}>
                         {alertMessage}
