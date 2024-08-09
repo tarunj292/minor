@@ -350,14 +350,15 @@ const Form = () => {
                         </FormControl>
                     </Box>
 
-                    {cap !== null && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>Available Seats: {cap}<br /></div>}
+                    {cap !== null && <div style={{ marginTop: "-30px", marginBottom: "30px", fontWeight: "bold" }}>
+                        Available Seats: {cap}<br /></div>}
 
                     <button
                         type="submit"
                         className="btn btn-primary"
                         disabled={!isFormValid()} // Disable button if form is not valid
                         style={{
-                            textDecoration: !isFormValid() ? 'line-through' : 'none',
+                            textDecoration: !isFormValid() ? '' : 'none',
                             opacity: !isFormValid() ? 0.5 : 1, // Optional: makes the button look disabled
                             cursor: !isFormValid() ? 'not-allowed' : 'pointer' // Optional: shows a 'not allowed' cursor when hovering
                         }}
@@ -365,6 +366,9 @@ const Form = () => {
                     >
                         Submit
                     </button>
+                    {!isFormValid()  && (
+                            <sup className='text-danger'>Fill the Form</sup>
+                        )}
                 </div>
                 <Dialog open={alertOpen} onClose={handleAlertClose}>
                     <Alert onClose={handleAlertClose} severity={severity}>
