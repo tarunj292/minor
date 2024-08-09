@@ -126,3 +126,4 @@ export const getAllStudentsByCategories = (category, selectedCourse) => {
       throw err;
     });
 };
+

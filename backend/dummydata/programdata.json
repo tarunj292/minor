@@ -3,20 +3,27 @@
     "progName": "Bachelor of Arts (Mass Communication & Journalism)",
     "minor": [
       "Minor in Accounting",
+      "Minor in Financial Markets",
       "Minor in Banking",
+      "Minor in Data Science and Analytics",
       "Minor in Finance",
+      "Minor in Biotechnology",
       "Minor in Management",
       "Minor in Taxation",
       "Minor in Indian Heritage",
-      "Minor in UI/UX",
+      "Minor in UI&UX",
       "Minor in Marketing",
-      "Minor in Biotechnology",
+      "Minor in Psychology",
+      "Minor in Narrative Literature",
+      "Minor in Cyber Security",
+      "Minor in Economics",
       "Minor in Yoga"
     ]
   },
   {
     "progName": "Bachelor of Business Administration",
     "minor": [
+      "Minor in Psychology",
       "Minor in Biotechnology",
       "Minor in Cyber Security",
       "Minor in Marketing",
@@ -26,13 +33,19 @@
       "Minor in Indian Heritage",
       "Minor in Mass Communication",
       "Minor in Taxation",
-      "Minor in UI/UX",
-      "Minor in Yoga"
+      "Minor in UI&UX",
+      "Minor in Yoga",
+      "Minor in Financial Markets",
+      "Minor in Data Science and Analytics",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
+      
     ]
   },
   {
     "progName": "Bachelor of Business Management",
     "minor": [
+      "Minor in Psychology",
       "Minor in Biotechnology",
       "Minor in Cyber Security",
       "Minor in Marketing",
@@ -42,8 +55,12 @@
       "Minor in Indian Heritage",
       "Minor in Mass Communication",
       "Minor in Taxation",
-      "Minor in UI/UX",
-      "Minor in Yoga"
+      "Minor in UI&UX",
+      "Minor in Yoga",
+      "Minor in Financial Markets",
+      "Minor in Data Science and Analytics",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
@@ -51,13 +68,18 @@
     "minor": [
       "Minor in Cyber Security",
       "Minor in Biotechnology",
-      "Minor in Cyber Security",
       "Minor in Data Science and Analytics",
-      "Minor in Embedded system & IOT",
       "Minor in Indian Heritage",
       "Minor in Mass Communication",
-      "Minor in UI/UX",
-      "Minor in Yoga"
+      "Minor in UI&UX",
+      "Minor in Yoga",
+      "Minor in Banking",
+      "Minor in Management",
+      "Minor in Marketing",
+      "Minor in Economics",
+      "Minor in Psychology",
+      "Minor in Financial Markets",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
@@ -71,8 +93,14 @@
       "Minor in Taxation",
       "Minor in Indian Heritage",
       "Minor in Mass Communication",
-      "Minor in UI/UX",
-      "Minor in Yoga"
+      "Minor in UI&UX",
+      "Minor in Yoga",
+      "Minor in Financial Markets",
+      "Minor in Psychology",
+      "Minor in Data Science and Analytics",
+      "Minor in Cyber Security",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
@@ -86,52 +114,14 @@
       "Minor in Taxation",
       "Minor in Indian Heritage",
       "Minor in Mass Communication",
-      "Minor in UI/UX",
-      "Minor in Yoga"
-    ]
-  },
-  {
-    "progName": "Bachelor of Commerce (Specialization in Data Science)",
-    "minor": [
-      "Minor in Finance",
-      "Minor in Management",
-      "Minor in Marketing",
-      "Minor in Biotechnology",
-      "Minor in Taxation",
-      "Minor in Accounting",
+      "Minor in UI&UX",
+      "Minor in Yoga",
       "Minor in Banking",
-      "Minor in Indian Heritage",
-      "Minor in Mass Communication",
-      "Minor in UI/UX",
-      "Minor in Yoga"
-    ]
-  },
-  {
-    "progName": "Bachelor of Commerce (Accounting & Finance) Honour",
-    "minor": [
-      "Minor in Cyber Security",
-      "Minor in Biotechnology",
-      "Minor in Cyber Security",
+      "Minor in Psychology",
       "Minor in Data Science and Analytics",
-      "Minor in Embedded system & IOT",
-      "Minor in Indian Heritage",
-      "Minor in Mass Communication",
-      "Minor in UI/UX",
-      "Minor in Yoga"
-    ]
-  },
-  {
-    "progName": "Bachelor of Commerce Honour",
-    "minor": [
+      "Minor in Minor in Narrative Literature",
       "Minor in Cyber Security",
-      "Minor in Biotechnology",
-      "Minor in Cyber Security",
-      "Minor in Data Science and Analytics",
-      "Minor in Embedded system & IOT",
-      "Minor in Indian Heritage",
-      "Minor in Mass Communication",
-      "Minor in UI/UX",
-      "Minor in Yoga"
+      "Minor in Economics"
     ]
   },
   {
@@ -146,7 +136,13 @@
       "Minor in Marketing",
       "Minor in Yoga",
       "Minor in Mass Communication",
-      "Minor in Taxation"
+      "Minor in Taxation",
+      "Minor in Financial Markets",
+      "Minor in Data Science and Analytics",
+      "Minor in Minor in Narrative Literature",
+      "Minor in Cyber Security",
+      "Minor in UI&UX",
+      "Minor in Economics"
     ]
   },
   {
@@ -163,7 +159,13 @@
       "Minor in Mass Communication",
       "Minor in Embedded system & IOT",
       "Minor in Taxation",
-      "Minor in UI/UX"
+      "Minor in UI&UX",
+      "Minor in Financial Markets",
+      "Minor in Psychology",
+      "Minor in Data Science and Analytics",
+      "Minor in Cyber Security",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
@@ -180,7 +182,13 @@
       "Minor in Mass Communication",
       "Minor in Embedded system & IOT",
       "Minor in Taxation",
-      "Minor in UI/UX"
+      "Minor in UI&UX",
+      "Minor in Financial Markets",
+      "Minor in Psychology",
+      "Minor in Data Science and Analytics",
+      "Minor in Cyber Security",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
@@ -196,7 +204,12 @@
       "Minor in Marketing",
       "Minor in Yoga",
       "Minor in Mass Communication",
-      "Minor in UI/UX"
+      "Minor in UI&UX",
+      "Minor in Financial Markets",
+      "Minor in Psychology",
+      "Minor in Data Science and Analytics",
+      "Minor in Cyber Security",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
@@ -213,14 +226,20 @@
       "Minor in Mass Communication",
       "Minor in Embedded system & IOT",
       "Minor in Taxation",
-      "Minor in UI/UX"
+      "Minor in UI&UX",
+      "Minor in Financial Markets",
+      "Minor in Psychology",
+      "Minor in Data Science and Analytics",
+      "Minor in Cyber Security",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
     "progName": "Bachelor of Science (Biotechnology)",
     "minor": [
-      "Minor in Accounting",
-      "Minor in UI/UX",
+      " Minor in Accounting",
+      "Minor in UI&UX",
       "Minor in Banking",
       "Minor in Yoga",
       "Minor in Taxation",
@@ -230,7 +249,13 @@
       "Minor in Finance",
       "Minor in Indian Heritage",
       "Minor in Bioinformatics and Omics",
-      "Minor in Nanotechnology and IPR"
+      "Minor in Nanotechnology and IPR",
+      "Minor in Financial Markets",
+      "Minor in Psychology",
+      "Minor in Data Science and Analytics",
+      "Minor in Cyber Security",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
     ]
   },
   {
@@ -247,24 +272,12 @@
       "Minor in Mass Communication",
       "Minor in Embedded system & IOT",
       "Minor in Taxation",
-      "Minor in UI/UX"
-    ]
-  },
-  {
-    "progName": "Bachelor of Science (Information Technology) Honour",
-    "minor": [
-      "Minor in Accounting",
-      "Minor in Banking",
-      "Minor in Biotechnology",
-      "Minor in Finance",
-      "Minor in Indian Heritage",
-      "Minor in Management",
-      "Minor in Marketing",
-      "Minor in Yoga",
-      "Minor in Mass Communication",
-      "Minor in Embedded system & IOT",
-      "Minor in Taxation",
-      "Minor in UI/UX"
+      "Minor in UI&UX",
+      "Minor in Financial Markets",
+      "Minor in Psychology",
+      "Minor in Cyber Security",
+      "Minor in Economics",
+      "Minor in Minor in Narrative Literature"
     ]
   }
 ]

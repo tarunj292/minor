@@ -7,4 +7,4 @@ const ProfessionalCourse = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Professional Courses", ProfessionalCourse);
+module.exports = mongoose.model("Professional_Courses", ProfessionalCourse);

@@ -24,10 +24,12 @@ const MinorSubjectSchema = new mongoose.Schema({
       email: {
         type: String,
         required: true,
+        unique : true 
       },
       seatno: {
         type: String,
         required: true,
+        unique : true 
       },
       mobileno: {
         type: String,
@@ -36,6 +38,8 @@ const MinorSubjectSchema = new mongoose.Schema({
       memberid: {
         type: String,
         required: true,
+        unique : true 
+
       },
       programName: {
         type: String,

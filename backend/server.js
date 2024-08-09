@@ -8,6 +8,7 @@ require("dotenv").config({
 });
 
 const minorRouter = require("./routes/minorRoutes");
+const sportRouter = require("./routes/sportRoutes");
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -21,6 +22,7 @@ app.use(morgan("short"));
 app.use(express.json());
 
 app.use("/api", minorRouter);
+app.use("/api/sport", sportRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on ${process.env.PORT}`);
